@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>NRL Value Report &mdash; Round 5 &mdash; 2026-03-31 19:12 AEST</title>
+<title>NRL Value Report &mdash; Round 6 &mdash; 2026-04-07 20:46 AEST</title>
 <style>
   body { font-family: monospace; background: #0f1117; color: #e0e0e0; margin: 2rem; }
   h1   { color: #ffffff; font-size: 1.2rem; margin-bottom: 0.2rem; }
@@ -16,7 +16,7 @@
   td.na        { color: #555; }
   td.pos       { color: #4caf50; }
   td.neg       { color: #e57373; }
-  td.value     { color: #00e676; font-weight: bold; background: #0a2a0a; }
+  td.value     { color: #00e676; font-weight: bold; background: #0a2a0a; }  /* kept for line value */
   tr.match-row { cursor: pointer; }
   tr.match-row:hover td { background: #1a1d2a; }
   tr.squad-row td { padding: 0; border-bottom: 2px solid #333; }
@@ -35,11 +35,19 @@
   td.pnum  { color: #555; width: 2rem; }
   td.pname { text-align: left; }
   td.ppos  { color: #888; }
-  td.elo-low  { color: #e57373; font-weight: bold; }
-  td.elo-mid  { color: #ffd54f; font-weight: bold; }
-  td.elo-high { color: #66bb6a; font-weight: bold; }
+  td.elo-1 { color: #e57373; font-weight: bold; }
+  td.elo-2 { color: #ff9800; font-weight: bold; }
+  td.elo-3 { color: #ffd54f; font-weight: bold; }
+  td.elo-4 { color: #a5d6a7; font-weight: bold; }
+  td.elo-5 { color: #66bb6a; font-weight: bold; }
   p.no-squad { color: #555; font-size: 0.82rem; font-style: italic; }
   p.no-value       { color: #888; margin-top: 1rem; font-size: 0.9rem; }
+  td.value-a { color: #00ff99; font-weight: bold; background: #001a0d; }
+  td.value-b { color: #00e676; font-weight: bold; background: #0a2a0a; }
+  .tier-a-header { color: #00ff99; font-weight: bold; margin: 0.4rem 0 0.4rem 0; font-size: 0.95rem; }
+  .tier-b-header { color: #00e676; font-weight: bold; margin: 0.8rem 0 0.4rem 0; font-size: 0.95rem; }
+  .tier-a-badge { background: #003322; color: #00ff99; font-size: 0.75rem; padding: 1px 5px; border-radius: 3px; margin-right: 4px; }
+  .tier-b-badge { background: #0a2a0a; color: #00e676; font-size: 0.75rem; padding: 1px 5px; border-radius: 3px; margin-right: 4px; }
   .legend { color: #666; font-size: 0.8rem; margin-top: 0.5rem; }
   td.bk-odds { cursor: help; }
   td.line  { color: #88aaff; font-weight: bold; }
@@ -61,6 +69,22 @@
   [data-tip]:hover::after { opacity: 1; }
   footer.disclaimer { margin-top: 3rem; padding: 1rem 1.2rem; border-top: 1px solid #333; color: #666; font-size: 0.78rem; line-height: 1.6; }
   footer.disclaimer a { color: #888; }
+  div.line-value-box { border-color: #88aaff; }
+  p.line-value-header { color: #88aaff; font-weight: bold; margin: 0 0 0.6rem 0; font-size: 1rem; }
+  .tier-a-label { color: #00ff99; font-weight: bold; }
+  .tier-b-label { color: #00e676; }
+  div.ladder-cols { display: flex; gap: 2rem; margin-top: 1.5rem; flex-wrap: wrap; }
+  div.ladder-side { flex: 1; min-width: 300px; }
+  div.ladder-side h3 { color: #88aaff; font-size: 0.95rem; margin: 0 0 0.5rem 0; }
+  table.ladder-table { font-size: 0.85rem; width: 100%; }
+  table.ladder-table th { background: #1e2130; color: #aaa; padding: 4px 8px; border-bottom: 2px solid #333; text-align: center; }
+  table.ladder-table td { padding: 4px 8px; border-bottom: 1px solid #1e2130; text-align: center; }
+  table.ladder-table td.lteam { text-align: left; font-weight: bold; }
+  tr.finals-top { background: #0a1a0a; }
+  tr.finals-mid { background: #1a1a08; }
+  .pos-chg-up { color: #4caf50; font-size: 0.75rem; }
+  .pos-chg-dn { color: #e57373; font-size: 0.75rem; }
+  .pos-chg-eq { color: #555; font-size: 0.75rem; }
 </style>
 <script>
   function toggleSquad(id) {
@@ -70,12 +94,13 @@
 </script>
 </head>
 <body>
-<h1>NRL VALUE REPORT &mdash; Round 5 &mdash; 2026-03-31 19:12 AEST</h1>
-<p class="subtitle">Generated 2026-03-31 19:12 AEST &nbsp;|&nbsp; Best AU bookmaker odds &nbsp;|&nbsp;
+<h1>NRL VALUE REPORT &mdash; Round 6 &mdash; 2026-04-07 20:46 AEST</h1>
+<p class="subtitle">Generated 2026-04-07 20:46 AEST &nbsp;|&nbsp; Best AU bookmaker odds &nbsp;|&nbsp;
 Model = fair odds (1/prob, no vig) &nbsp;|&nbsp; &#916; = Bookies &minus; Model (positive = value) &nbsp;|&nbsp;
 Bk Line = bookmakers handicap (home) &nbsp;|&nbsp; &#916; Line = Model margin &minus; Bk line (positive = home covers) &nbsp;|&nbsp;
 <em>Click any row to show/hide squads</em></p>
-<div class="value-box"><p class="value-header">&#9733; BEST VALUE (&#916; &ge; +0.30)</p><ul class="value-list"><li><b>Sea Eagles (A)</b>: Model gives 32.8% win probability (fair odds 3.05) vs market 3.35 (implied 29.9%). Model is <b>+2.9pp</b> more confident. Tier: <em>Strong Home</em>. Predicted margin: +7.1.</li><li><b>Rabbitohs (H)</b>: Model gives 64.5% win probability (fair odds 1.55) vs market 1.90 (implied 52.6%). Model is <b>+11.9pp</b> more confident. Tier: <em>Strong Home</em>. Predicted margin: +4.0.</li><li><b>Titans (H)</b>: Model gives 27.8% win probability (fair odds 3.60) vs market 4.35 (implied 23.0%). Model is <b>+4.8pp</b> more confident. Tier: <em>Strong Away</em>. Predicted margin: -2.0.</li><li><b>Knights (H)</b>: Model gives 54.4% win probability (fair odds 1.84) vs market 2.40 (implied 41.7%). Model is <b>+12.7pp</b> more confident. Tier: <em>Lean Home</em>. Predicted margin: +3.5.</li></ul></div>
+<div class="value-box"><p class="tier-b-header">&#9733; TIER B — VALUE</p><ul class="value-list"><li><span class="tier-b-badge">★ TIER B</span> <b>Sharks (H)</b>: Model gives 60.0% win probability (fair odds 1.67) vs market 2.05 (implied 48.8%). Model is <b>+11.2pp</b> more confident. EV: <b>+23.0%</b>. Predicted margin: +3.7.</li><li><span class="tier-b-badge">★ TIER B</span> <b>Eels (H)</b>: Model gives 70.7% win probability (fair odds 1.42) vs market 1.65 (implied 60.6%). Model is <b>+10.1pp</b> more confident. EV: <b>+16.6%</b>. Predicted margin: +6.4.</li><li><span class="tier-b-badge">★ TIER B</span> <b>Rabbitohs (H)</b>: Model gives 76.0% win probability (fair odds 1.31) vs market 1.53 (implied 65.4%). Model is <b>+10.6pp</b> more confident. EV: <b>+16.4%</b>. Predicted margin: +5.6.</li></ul></div>
+<div class="value-box line-value-box"><p class="line-value-header">&#9733; LINE VALUE OPPORTUNITIES</p><table style="width:auto;min-width:400px;"><thead><tr><th>Tier</th><th>Team</th><th>Spread</th><th>Cover %</th><th>Line Odds</th><th>EV</th></tr></thead><tbody><tr><td class="tier-a-label">★★</td><td class="team">Bulldogs</td><td class="line">+17.5</td><td>70.5%</td><td>1.90</td><td class="value-a">+33.9%</td></tr><tr><td class="tier-a-label">★★</td><td class="team">Dragons</td><td class="line">+7.5</td><td>65.1%</td><td>1.98</td><td class="value-a">+28.9%</td></tr><tr><td class="tier-a-label">★★</td><td class="team">Sharks</td><td class="line">+1.5</td><td>62.5%</td><td>1.95</td><td class="value-a">+21.8%</td></tr></tbody></table></div>
 <table>
 <thead>
 <tr>
@@ -86,326 +111,330 @@ Bk Line = bookmakers handicap (home) &nbsp;|&nbsp; &#916; Line = Model margin &m
 </tr>
 </thead>
 <tbody>
-<tr class="match-row" onclick="toggleSquad('sq_20261110510')" title="Click to expand squads"><td>5</td><td>Thu 02</td><td class='team'>Dolphins</td><td>1.49</td><td class="bk-odds" data-tip="Sportsbet">1.36</td><td class="neg">-0.13</td><td class='team'>Sea Eagles</td><td>3.05</td><td class="bk-odds" data-tip="Ladbrokes">3.35</td><td class="value">&#9733; +0.30</td><td class='predicted' data-tip='Confidence: Strong Home'>Dolphins (H)</td><td class="margin">27&ndash;22</td><td class="line bk-odds" data-tip="Sportsbet">-10.5</td><td class="neg">-3.4</td><td class="result-live">Upcoming</td></tr>
-<tr id="sq_20261110510" class="squad-row" style="display:none;"><td colspan="15" class="squad-cell"><div class="squad-cols"><div class="squad-side"><h3>Dolphins</h3><table class='squad-table'><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>ELO</th></tr></thead><tbody><tr><td class='pnum'>1</td><td class='pname'>Hamiso Tabuai-Fidow</td><td class='ppos'>Fullback</td><td class='elo-high'>1877</td></tr>
-<tr><td class='pnum'>2</td><td class='pname'>Jamayne Isaako</td><td class='ppos'>Winger</td><td class='elo-high'>1893</td></tr>
-<tr><td class='pnum'>3</td><td class='pname'>Jake Averillo</td><td class='ppos'>Centre</td><td class='elo-high'>1791</td></tr>
-<tr><td class='pnum'>4</td><td class='pname'>Herbie Farnworth</td><td class='ppos'>Centre</td><td class='elo-high'>2343</td></tr>
-<tr><td class='pnum'>5</td><td class='pname'>Selwyn Cobbo</td><td class='ppos'>Winger</td><td class='elo-high'>2126</td></tr>
-<tr><td class='pnum'>6</td><td class='pname'>Kodi Nikorima</td><td class='ppos'>Five-Eighth</td><td class='elo-high'>1930</td></tr>
-<tr><td class='pnum'>7</td><td class='pname'>Isaiya Katoa</td><td class='ppos'>Halfback</td><td class='elo-high'>1757</td></tr>
-<tr><td class='pnum'>8</td><td class='pname'>Tom Gilbert</td><td class='ppos'>Prop</td><td class='elo-high'>1734</td></tr>
-<tr><td class='pnum'>9</td><td class='pname'>Max Plath</td><td class='ppos'>Hooker</td><td class='elo-high'>1686</td></tr>
-<tr><td class='pnum'>10</td><td class='pname'>Felise Kaufusi</td><td class='ppos'>Prop</td><td class='elo-high'>2117</td></tr>
-<tr><td class='pnum'>11</td><td class='pname'>Connelly Lemuelu</td><td class='ppos'>2nd Row</td><td class='elo-high'>1722</td></tr>
-<tr><td class='pnum'>12</td><td class='pname'>Kulikefu Finefeuiaki</td><td class='ppos'>2nd Row</td><td class='elo-high'>1769</td></tr>
-<tr><td class='pnum'>13</td><td class='pname'>Morgan Knowles</td><td class='ppos'>Lock</td><td class='elo-mid'>1531</td></tr>
-<tr><td class='pnum'>14</td><td class='pname'>Bradley Schneider</td><td class='ppos'>Interchange</td><td class='elo-high'>1625</td></tr>
-<tr><td class='pnum'>15</td><td class='pname'>Thomas Flegler</td><td class='ppos'>Interchange</td><td class='elo-high'>1783</td></tr>
-<tr><td class='pnum'>16</td><td class='pname'>Ray Stone</td><td class='ppos'>Interchange</td><td class='elo-low'>1129</td></tr>
-<tr><td class='pnum'>17</td><td class='pname'>Francis Molo</td><td class='ppos'>Interchange</td><td class='elo-high'>1717</td></tr>
-<tr><td class='pnum'>18</td><td class='pname'>Kurt Donoghoe</td><td class='ppos'>Interchange</td><td class='elo-low'>1315</td></tr>
-<tr><td class='pnum'>19</td><td class='pname'>Trai Fuller</td><td class='ppos'>Interchange</td><td class='elo-high'>1565</td></tr>
-</tbody><tfoot><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;padding-top:4px;'>Player avg ELO</td><td class='elo-high'>1759</td></tr><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;'>Team ELO</td><td class='elo-mid'>1548</td></tr></tfoot></table></div><div class="squad-side"><h3>Sea Eagles</h3><table class='squad-table'><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>ELO</th></tr></thead><tbody><tr><td class='pnum'>1</td><td class='pname'>Tom Trbojevic</td><td class='ppos'>Fullback</td><td class='elo-high'>2240</td></tr>
-<tr><td class='pnum'>2</td><td class='pname'>Clayton Faulalo</td><td class='ppos'>Winger</td><td class='elo-mid'>1535</td></tr>
-<tr><td class='pnum'>3</td><td class='pname'>Tolutau Koula</td><td class='ppos'>Centre</td><td class='elo-high'>1906</td></tr>
-<tr><td class='pnum'>4</td><td class='pname'>Reuben Garrick</td><td class='ppos'>Centre</td><td class='elo-high'>2155</td></tr>
-<tr><td class='pnum'>5</td><td class='pname'>Lehi Hopoate</td><td class='ppos'>Winger</td><td class='elo-high'>1716</td></tr>
-<tr><td class='pnum'>6</td><td class='pname'>Luke Brooks</td><td class='ppos'>Five-Eighth</td><td class='elo-high'>2058</td></tr>
-<tr><td class='pnum'>7</td><td class='pname'>Jamal Fogarty</td><td class='ppos'>Halfback</td><td class='elo-high'>1991</td></tr>
-<tr><td class='pnum'>8</td><td class='pname'>Taniela Paseka</td><td class='ppos'>Prop</td><td class='elo-high'>2193</td></tr>
-<tr><td class='pnum'>9</td><td class='pname'>Brandon Wakeham</td><td class='ppos'>Hooker</td><td class='elo-low'>1444</td></tr>
-<tr><td class='pnum'>10</td><td class='pname'>Kobe Hetherington</td><td class='ppos'>Prop</td><td class='elo-mid'>1540</td></tr>
-<tr><td class='pnum'>11</td><td class='pname'>Haumole Olakau'atu</td><td class='ppos'>2nd Row</td><td class='elo-high'>2340</td></tr>
-<tr><td class='pnum'>12</td><td class='pname'>Ben Trbojevic</td><td class='ppos'>2nd Row</td><td class='elo-high'>1638</td></tr>
-<tr><td class='pnum'>13</td><td class='pname'>Jake Trbojevic</td><td class='ppos'>Lock</td><td class='elo-high'>2095</td></tr>
-<tr><td class='pnum'>14</td><td class='pname'>Jake Simpkin</td><td class='ppos'>Interchange</td><td class='elo-low'>1301</td></tr>
-<tr><td class='pnum'>15</td><td class='pname'>Corey Waddell</td><td class='ppos'>Interchange</td><td class='elo-mid'>1494</td></tr>
-<tr><td class='pnum'>16</td><td class='pname'>Ethan Bullemor</td><td class='ppos'>Interchange</td><td class='elo-high'>1909</td></tr>
-<tr><td class='pnum'>17</td><td class='pname'>Simione Laiafi</td><td class='ppos'>Interchange</td><td class='elo-mid'>1480</td></tr>
-<tr><td class='pnum'>18</td><td class='pname'>Paul Bryan</td><td class='ppos'>Interchange</td><td class='elo-low'>1442</td></tr>
-<tr><td class='pnum'>19</td><td class='pname'>Josh Feledy</td><td class='ppos'>Interchange</td><td class='elo-mid'>1484</td></tr>
-</tbody><tfoot><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;padding-top:4px;'>Player avg ELO</td><td class='elo-high'>1787</td></tr><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;'>Team ELO</td><td class='elo-low'>1360</td></tr></tfoot></table></div></div></td></tr>
-<tr class="match-row" onclick="toggleSquad('sq_20261110520')" title="Click to expand squads"><td>5</td><td>Fri 03</td><td class='team'>Rabbitohs</td><td>1.55</td><td class="bk-odds" data-tip="TAB">1.90</td><td class="value">&#9733; +0.35</td><td class='team'>Bulldogs</td><td>2.82</td><td class="bk-odds" data-tip="Sportsbet">2.00</td><td class="neg">-0.82</td><td class='predicted' data-tip='Confidence: Strong Home'>Rabbitohs (H)</td><td class="margin">22&ndash;18</td><td class="line bk-odds" data-tip="TAB">-1.5</td><td class="pos">+2.5</td><td class="result-live">Upcoming</td></tr>
-<tr id="sq_20261110520" class="squad-row" style="display:none;"><td colspan="15" class="squad-cell"><div class="squad-cols"><div class="squad-side"><h3>Rabbitohs</h3><table class='squad-table'><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>ELO</th></tr></thead><tbody><tr><td class='pnum'>1</td><td class='pname'>Jye Gray</td><td class='ppos'>Fullback</td><td class='elo-high'>1655</td></tr>
-<tr><td class='pnum'>2</td><td class='pname'>Alex Johnston</td><td class='ppos'>Winger</td><td class='elo-high'>2501</td></tr>
-<tr><td class='pnum'>3</td><td class='pname'>Latrell Mitchell</td><td class='ppos'>Centre</td><td class='elo-high'>2349</td></tr>
-<tr><td class='pnum'>4</td><td class='pname'>Jack Wighton</td><td class='ppos'>Centre</td><td class='elo-high'>2190</td></tr>
-<tr><td class='pnum'>5</td><td class='pname'>Campbell Graham</td><td class='ppos'>Winger</td><td class='elo-high'>2128</td></tr>
-<tr><td class='pnum'>6</td><td class='pname'>Cody Walker</td><td class='ppos'>Five-Eighth</td><td class='elo-high'>2536</td></tr>
-<tr><td class='pnum'>7</td><td class='pname'>Jamie Humphreys</td><td class='ppos'>Halfback</td><td class='elo-high'>1619</td></tr>
-<tr><td class='pnum'>8</td><td class='pname'>Tevita Tatola</td><td class='ppos'>Prop</td><td class='elo-high'>2099</td></tr>
-<tr><td class='pnum'>9</td><td class='pname'>Bronson Garlick</td><td class='ppos'>Hooker</td><td class='elo-high'>1592</td></tr>
-<tr><td class='pnum'>10</td><td class='pname'>Keaon Koloamatangi</td><td class='ppos'>Prop</td><td class='elo-high'>2438</td></tr>
-<tr><td class='pnum'>11</td><td class='pname'>David Fifita</td><td class='ppos'>2nd Row</td><td class='elo-high'>2433</td></tr>
-<tr><td class='pnum'>12</td><td class='pname'>Tallis Duncan</td><td class='ppos'>2nd Row</td><td class='elo-high'>1622</td></tr>
-<tr><td class='pnum'>13</td><td class='pname'>Cameron Murray</td><td class='ppos'>Lock</td><td class='elo-high'>2313</td></tr>
-<tr><td class='pnum'>14</td><td class='pname'>Peter Mamouzelos</td><td class='ppos'>Interchange</td><td class='elo-low'>1391</td></tr>
-<tr><td class='pnum'>15</td><td class='pname'>Lachlan Hubner</td><td class='ppos'>Interchange</td><td class='elo-mid'>1491</td></tr>
-<tr><td class='pnum'>16</td><td class='pname'>Sean Keppie</td><td class='ppos'>Interchange</td><td class='elo-mid'>1482</td></tr>
-<tr><td class='pnum'>17</td><td class='pname'>Liam Le Blanc</td><td class='ppos'>Interchange</td><td class='elo-mid'>1512</td></tr>
-<tr><td class='pnum'>18</td><td class='pname'>Jayden Sullivan</td><td class='ppos'>Interchange</td><td class='elo-mid'>1515</td></tr>
-<tr><td class='pnum'>19</td><td class='pname'>Moala Graham-Taufa</td><td class='ppos'>Interchange</td><td class='elo-mid'>1533</td></tr>
-</tbody><tfoot><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;padding-top:4px;'>Player avg ELO</td><td class='elo-high'>1916</td></tr><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;'>Team ELO</td><td class='elo-mid'>1466</td></tr></tfoot></table></div><div class="squad-side"><h3>Bulldogs</h3><table class='squad-table'><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>ELO</th></tr></thead><tbody><tr><td class='pnum'>1</td><td class='pname'>Connor Tracey</td><td class='ppos'>Fullback</td><td class='elo-high'>2116</td></tr>
-<tr><td class='pnum'>2</td><td class='pname'>Jacob Kiraz</td><td class='ppos'>Winger</td><td class='elo-high'>1930</td></tr>
-<tr><td class='pnum'>3</td><td class='pname'>Enari Tuala</td><td class='ppos'>Centre</td><td class='elo-high'>1835</td></tr>
-<tr><td class='pnum'>4</td><td class='pname'>Stephen Crichton</td><td class='ppos'>Centre</td><td class='elo-high'>2540</td></tr>
-<tr><td class='pnum'>5</td><td class='pname'>Marcelo Montoya</td><td class='ppos'>Winger</td><td class='elo-high'>1992</td></tr>
-<tr><td class='pnum'>6</td><td class='pname'>Matt Burton</td><td class='ppos'>Five-Eighth</td><td class='elo-high'>2311</td></tr>
-<tr><td class='pnum'>7</td><td class='pname'>Lachlan Galvin</td><td class='ppos'>Halfback</td><td class='elo-high'>1701</td></tr>
-<tr><td class='pnum'>8</td><td class='pname'>Max King</td><td class='ppos'>Prop</td><td class='elo-high'>2085</td></tr>
-<tr><td class='pnum'>9</td><td class='pname'>Bailey Hayward</td><td class='ppos'>Hooker</td><td class='elo-mid'>1502</td></tr>
-<tr><td class='pnum'>10</td><td class='pname'>Samuel Hughes</td><td class='ppos'>Prop</td><td class='elo-high'>1564</td></tr>
-<tr><td class='pnum'>11</td><td class='pname'>Viliame Kikau</td><td class='ppos'>2nd Row</td><td class='elo-high'>2485</td></tr>
-<tr><td class='pnum'>12</td><td class='pname'>Jacob Preston</td><td class='ppos'>2nd Row</td><td class='elo-high'>1943</td></tr>
-<tr><td class='pnum'>13</td><td class='pname'>Jaeman Salmon</td><td class='ppos'>Lock</td><td class='elo-high'>1712</td></tr>
-<tr><td class='pnum'>14</td><td class='pname'>Kurt Mann</td><td class='ppos'>Interchange</td><td class='elo-high'>2049</td></tr>
-<tr><td class='pnum'>15</td><td class='pname'>Sitili Tupouniua</td><td class='ppos'>Interchange</td><td class='elo-high'>1882</td></tr>
-<tr><td class='pnum'>16</td><td class='pname'>Harry Hayes</td><td class='ppos'>Interchange</td><td class='elo-high'>1731</td></tr>
-<tr><td class='pnum'>17</td><td class='pname'>Sean O'Sullivan</td><td class='ppos'>Interchange</td><td class='elo-high'>1592</td></tr>
-<tr><td class='pnum'>19</td><td class='pname'>Bronson Xerri</td><td class='ppos'>Interchange</td><td class='elo-high'>1890</td></tr>
-</tbody><tfoot><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;padding-top:4px;'>Player avg ELO</td><td class='elo-high'>1937</td></tr><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;'>Team ELO</td><td class='elo-mid'>1463</td></tr></tfoot></table></div></div></td></tr>
-<tr class="match-row" onclick="toggleSquad('sq_20261110530')" title="Click to expand squads"><td>5</td><td>Fri 03</td><td class='team'>Panthers</td><td>1.35</td><td class="bk-odds" data-tip="Sportsbet">1.40</td><td class="pos">+0.05</td><td class='team'>Storm</td><td>3.88</td><td class="bk-odds" data-tip="TAB Touch">3.15</td><td class="neg">-0.73</td><td class='predicted' data-tip='Confidence: Strong Home'>Panthers (H)</td><td class="margin">24&ndash;19</td><td class="line bk-odds" data-tip="Sportsbet">-8.5</td><td class="neg">-0.9</td><td class="result-live">Upcoming</td></tr>
-<tr id="sq_20261110530" class="squad-row" style="display:none;"><td colspan="15" class="squad-cell"><div class="squad-cols"><div class="squad-side"><h3>Panthers</h3><table class='squad-table'><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>ELO</th></tr></thead><tbody><tr><td class='pnum'>1</td><td class='pname'>Dylan Edwards</td><td class='ppos'>Fullback</td><td class='elo-high'>2912</td></tr>
-<tr><td class='pnum'>2</td><td class='pname'>Thomas Jenkins</td><td class='ppos'>Winger</td><td class='elo-high'>1701</td></tr>
-<tr><td class='pnum'>3</td><td class='pname'>Paul Alamoti</td><td class='ppos'>Centre</td><td class='elo-high'>1902</td></tr>
-<tr><td class='pnum'>4</td><td class='pname'>Casey McLean</td><td class='ppos'>Centre</td><td class='elo-high'>1720</td></tr>
-<tr><td class='pnum'>5</td><td class='pname'>Brian To'o</td><td class='ppos'>Winger</td><td class='elo-high'>2758</td></tr>
-<tr><td class='pnum'>6</td><td class='pname'>Blaize Talagi</td><td class='ppos'>Five-Eighth</td><td class='elo-high'>1676</td></tr>
-<tr><td class='pnum'>7</td><td class='pname'>Nathan Cleary</td><td class='ppos'>Halfback</td><td class='elo-high'>2849</td></tr>
-<tr><td class='pnum'>8</td><td class='pname'>Moses Leota</td><td class='ppos'>Prop</td><td class='elo-high'>2364</td></tr>
-<tr><td class='pnum'>9</td><td class='pname'>Freddy Lussick</td><td class='ppos'>Hooker</td><td class='elo-mid'>1456</td></tr>
-<tr><td class='pnum'>10</td><td class='pname'>Lindsay Smith</td><td class='ppos'>Prop</td><td class='elo-high'>2150</td></tr>
-<tr><td class='pnum'>11</td><td class='pname'>Isaiah Papali'i</td><td class='ppos'>2nd Row</td><td class='elo-high'>2264</td></tr>
-<tr><td class='pnum'>12</td><td class='pname'>Liam Martin</td><td class='ppos'>2nd Row</td><td class='elo-high'>2442</td></tr>
-<tr><td class='pnum'>13</td><td class='pname'>Isaah Yeo</td><td class='ppos'>Lock</td><td class='elo-high'>3149</td></tr>
-<tr><td class='pnum'>14</td><td class='pname'>Jack Cogger</td><td class='ppos'>Interchange</td><td class='elo-high'>1746</td></tr>
-<tr><td class='pnum'>15</td><td class='pname'>Billy Phillips</td><td class='ppos'>Interchange</td><td class='elo-high'>1678</td></tr>
-<tr><td class='pnum'>16</td><td class='pname'>Scott Sorensen</td><td class='ppos'>Interchange</td><td class='elo-high'>2301</td></tr>
-<tr><td class='pnum'>17</td><td class='pname'>Luke Garner</td><td class='ppos'>Interchange</td><td class='elo-high'>1921</td></tr>
-<tr><td class='pnum'>18</td><td class='pname'>Izack Tago</td><td class='ppos'>Interchange</td><td class='elo-high'>2168</td></tr>
-<tr><td class='pnum'>19</td><td class='pname'>Kalani Going</td><td class='ppos'>Interchange</td><td class='elo-mid'>1511</td></tr>
-</tbody><tfoot><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;padding-top:4px;'>Player avg ELO</td><td class='elo-high'>2140</td></tr><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;'>Team ELO</td><td class='elo-high'>1868</td></tr></tfoot></table></div><div class="squad-side"><h3>Storm</h3><table class='squad-table'><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>ELO</th></tr></thead><tbody><tr><td class='pnum'>1</td><td class='pname'>Sualauvi Faalogo</td><td class='ppos'>Fullback</td><td class='elo-high'>1897</td></tr>
-<tr><td class='pnum'>2</td><td class='pname'>Will Warbrick</td><td class='ppos'>Winger</td><td class='elo-high'>2086</td></tr>
-<tr><td class='pnum'>3</td><td class='pname'>Jack Howarth</td><td class='ppos'>Centre</td><td class='elo-high'>1807</td></tr>
-<tr><td class='pnum'>4</td><td class='pname'>Nick Meaney</td><td class='ppos'>Centre</td><td class='elo-high'>2147</td></tr>
-<tr><td class='pnum'>5</td><td class='pname'>Siulagi Tuimalatu-Brown</td><td class='ppos'>Winger</td><td class='elo-low'>1423</td></tr>
-<tr><td class='pnum'>6</td><td class='pname'>Cameron Munster</td><td class='ppos'>Five-Eighth</td><td class='elo-high'>2805</td></tr>
-<tr><td class='pnum'>7</td><td class='pname'>Jahrome Hughes</td><td class='ppos'>Halfback</td><td class='elo-high'>2899</td></tr>
-<tr><td class='pnum'>8</td><td class='pname'>Stefano Utoikamanu</td><td class='ppos'>Prop</td><td class='elo-high'>1800</td></tr>
-<tr><td class='pnum'>9</td><td class='pname'>Harry Grant</td><td class='ppos'>Hooker</td><td class='elo-high'>2607</td></tr>
-<tr><td class='pnum'>10</td><td class='pname'>Josh King</td><td class='ppos'>Prop</td><td class='elo-high'>2177</td></tr>
-<tr><td class='pnum'>11</td><td class='pname'>Joe Chan</td><td class='ppos'>2nd Row</td><td class='elo-high'>1567</td></tr>
-<tr><td class='pnum'>12</td><td class='pname'>Alec MacDonald</td><td class='ppos'>2nd Row</td><td class='elo-high'>1653</td></tr>
-<tr><td class='pnum'>13</td><td class='pname'>Trent Loiero</td><td class='ppos'>Lock</td><td class='elo-high'>2233</td></tr>
-<tr><td class='pnum'>14</td><td class='pname'>Tyran Wishart</td><td class='ppos'>Interchange</td><td class='elo-high'>1883</td></tr>
-<tr><td class='pnum'>15</td><td class='pname'>Davvy Moale</td><td class='ppos'>Interchange</td><td class='elo-high'>1641</td></tr>
-<tr><td class='pnum'>16</td><td class='pname'>Jack Hetherington</td><td class='ppos'>Interchange</td><td class='elo-mid'>1506</td></tr>
-<tr><td class='pnum'>17</td><td class='pname'>Cooper Clarke</td><td class='ppos'>Interchange</td><td class='elo-mid'>1507</td></tr>
-<tr><td class='pnum'>18</td><td class='pname'>Lazarus Vaalepu</td><td class='ppos'>Interchange</td><td class='elo-mid'>1544</td></tr>
-<tr><td class='pnum'>19</td><td class='pname'>Manaia Waitere</td><td class='ppos'>Interchange</td><td class='elo-mid'>1542</td></tr>
-</tbody><tfoot><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;padding-top:4px;'>Player avg ELO</td><td class='elo-high'>1933</td></tr><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;'>Team ELO</td><td class='elo-high'>1640</td></tr></tfoot></table></div></div></td></tr>
-<tr class="match-row" onclick="toggleSquad('sq_20261110540')" title="Click to expand squads"><td>5</td><td>Sat 04</td><td class='team'>Dragons</td><td>2.01</td><td class="bk-odds" data-tip="Sportsbet">2.16</td><td class="pos">+0.15</td><td class='team'>Cowboys</td><td>1.99</td><td class="bk-odds" data-tip="Neds">1.78</td><td class="neg">-0.21</td><td class='predicted' data-tip='Confidence: Toss-Up'>Cowboys (A)</td><td class="margin">25&ndash;22</td><td class="line bk-odds" data-tip="TAB">+2.5</td><td class="pos">+1.8</td><td class="result-live">Upcoming</td></tr>
-<tr id="sq_20261110540" class="squad-row" style="display:none;"><td colspan="15" class="squad-cell"><div class="squad-cols"><div class="squad-side"><h3>Dragons</h3><table class='squad-table'><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>ELO</th></tr></thead><tbody><tr><td class='pnum'>1</td><td class='pname'>Clinton Gutherson</td><td class='ppos'>Fullback</td><td class='elo-high'>2184</td></tr>
-<tr><td class='pnum'>2</td><td class='pname'>Christian Tuipulotu</td><td class='ppos'>Winger</td><td class='elo-high'>1710</td></tr>
-<tr><td class='pnum'>3</td><td class='pname'>Moses Suli</td><td class='ppos'>Centre</td><td class='elo-high'>2094</td></tr>
-<tr><td class='pnum'>4</td><td class='pname'>Valentine Holmes</td><td class='ppos'>Centre</td><td class='elo-high'>2400</td></tr>
-<tr><td class='pnum'>5</td><td class='pname'>David Fale</td><td class='ppos'>Winger</td><td class='elo-mid'>1500</td></tr>
-<tr><td class='pnum'>6</td><td class='pname'>Lyhkan King-Togia</td><td class='ppos'>Five-Eighth</td><td class='elo-low'>1408</td></tr>
-<tr><td class='pnum'>7</td><td class='pname'>Daniel Atkinson</td><td class='ppos'>Halfback</td><td class='elo-mid'>1539</td></tr>
-<tr><td class='pnum'>8</td><td class='pname'>Emre Guler</td><td class='ppos'>Prop</td><td class='elo-high'>1623</td></tr>
-<tr><td class='pnum'>9</td><td class='pname'>Damien Cook</td><td class='ppos'>Hooker</td><td class='elo-high'>2559</td></tr>
-<tr><td class='pnum'>10</td><td class='pname'>Toby Couchman</td><td class='ppos'>Prop</td><td class='elo-high'>1615</td></tr>
-<tr><td class='pnum'>11</td><td class='pname'>Luciano Leilua</td><td class='ppos'>2nd Row</td><td class='elo-high'>1948</td></tr>
-<tr><td class='pnum'>12</td><td class='pname'>Jaydn Su'A</td><td class='ppos'>2nd Row</td><td class='elo-high'>2086</td></tr>
-<tr><td class='pnum'>13</td><td class='pname'>Hamish Stewart</td><td class='ppos'>Lock</td><td class='elo-mid'>1527</td></tr>
-<tr><td class='pnum'>14</td><td class='pname'>Jacob Liddle</td><td class='ppos'>Interchange</td><td class='elo-high'>1734</td></tr>
-<tr><td class='pnum'>15</td><td class='pname'>Blake Lawrie</td><td class='ppos'>Interchange</td><td class='elo-high'>1714</td></tr>
-<tr><td class='pnum'>16</td><td class='pname'>Jacob Halangahu</td><td class='ppos'>Interchange</td><td class='elo-mid'>1500</td></tr>
-<tr><td class='pnum'>17</td><td class='pname'>Hame Sele</td><td class='ppos'>Interchange</td><td class='elo-high'>1709</td></tr>
-<tr><td class='pnum'>18</td><td class='pname'>Josh Kerr</td><td class='ppos'>Interchange</td><td class='elo-mid'>1543</td></tr>
-<tr><td class='pnum'>19</td><td class='pname'>Tyrell Sloan</td><td class='ppos'>Interchange</td><td class='elo-high'>1700</td></tr>
-</tbody><tfoot><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;padding-top:4px;'>Player avg ELO</td><td class='elo-high'>1794</td></tr><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;'>Team ELO</td><td class='elo-low'>1205</td></tr></tfoot></table></div><div class="squad-side"><h3>Cowboys</h3><table class='squad-table'><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>ELO</th></tr></thead><tbody><tr><td class='pnum'>1</td><td class='pname'>Scott Drinkwater</td><td class='ppos'>Fullback</td><td class='elo-high'>2299</td></tr>
-<tr><td class='pnum'>2</td><td class='pname'>Braidon Burns</td><td class='ppos'>Winger</td><td class='elo-high'>1794</td></tr>
-<tr><td class='pnum'>3</td><td class='pname'>Jaxon Purdue</td><td class='ppos'>Centre</td><td class='elo-high'>1610</td></tr>
-<tr><td class='pnum'>4</td><td class='pname'>Tom Chester</td><td class='ppos'>Centre</td><td class='elo-mid'>1505</td></tr>
-<tr><td class='pnum'>5</td><td class='pname'>Murray Taulagi</td><td class='ppos'>Winger</td><td class='elo-high'>2160</td></tr>
-<tr><td class='pnum'>6</td><td class='pname'>Jake Clifford</td><td class='ppos'>Five-Eighth</td><td class='elo-high'>1769</td></tr>
-<tr><td class='pnum'>7</td><td class='pname'>Tom Dearden</td><td class='ppos'>Halfback</td><td class='elo-high'>2030</td></tr>
-<tr><td class='pnum'>8</td><td class='pname'>Coen Hess</td><td class='ppos'>Prop</td><td class='elo-high'>1711</td></tr>
-<tr><td class='pnum'>9</td><td class='pname'>Reed Mahoney</td><td class='ppos'>Hooker</td><td class='elo-high'>2002</td></tr>
-<tr><td class='pnum'>10</td><td class='pname'>Jason Taumalolo</td><td class='ppos'>Prop</td><td class='elo-high'>2362</td></tr>
-<tr><td class='pnum'>11</td><td class='pname'>Heilum Luki</td><td class='ppos'>2nd Row</td><td class='elo-high'>1918</td></tr>
-<tr><td class='pnum'>12</td><td class='pname'>Sam McIntyre</td><td class='ppos'>2nd Row</td><td class='elo-mid'>1485</td></tr>
-<tr><td class='pnum'>13</td><td class='pname'>Reuben Cotter</td><td class='ppos'>Lock</td><td class='elo-high'>1946</td></tr>
-<tr><td class='pnum'>14</td><td class='pname'>Soni Luke</td><td class='ppos'>Interchange</td><td class='elo-low'>1352</td></tr>
-<tr><td class='pnum'>15</td><td class='pname'>Griffin Neame</td><td class='ppos'>Interchange</td><td class='elo-high'>1713</td></tr>
-<tr><td class='pnum'>16</td><td class='pname'>Thomas Mikaele</td><td class='ppos'>Interchange</td><td class='elo-high'>1768</td></tr>
-<tr><td class='pnum'>17</td><td class='pname'>Matthew Lodge</td><td class='ppos'>Interchange</td><td class='elo-high'>1785</td></tr>
-<tr><td class='pnum'>18</td><td class='pname'>Harrison Edwards</td><td class='ppos'>Interchange</td><td class='elo-low'>1369</td></tr>
-<tr><td class='pnum'>19</td><td class='pname'>Zac Laybutt</td><td class='ppos'>Interchange</td><td class='elo-high'>1574</td></tr>
-</tbody><tfoot><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;padding-top:4px;'>Player avg ELO</td><td class='elo-high'>1797</td></tr><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;'>Team ELO</td><td class='elo-low'>1396</td></tr></tfoot></table></div></div></td></tr>
-<tr class="match-row" onclick="toggleSquad('sq_20261110550')" title="Click to expand squads"><td>5</td><td>Sat 04</td><td class='team'>Titans</td><td>3.60</td><td class="bk-odds" data-tip="Sportsbet">4.35</td><td class="value">&#9733; +0.75</td><td class='team'>Broncos</td><td>1.38</td><td class="bk-odds" data-tip="TAB">1.23</td><td class="neg">-0.15</td><td class='predicted' data-tip='Confidence: Strong Away'>Broncos (A)</td><td class="margin">22&ndash;24</td><td class="line bk-odds" data-tip="TAB Touch">+13.5</td><td class="pos">+11.4</td><td class="result-live">Upcoming</td></tr>
-<tr id="sq_20261110550" class="squad-row" style="display:none;"><td colspan="15" class="squad-cell"><div class="squad-cols"><div class="squad-side"><h3>Titans</h3><table class='squad-table'><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>ELO</th></tr></thead><tbody><tr><td class='pnum'>1</td><td class='pname'>Keano Kini</td><td class='ppos'>Fullback</td><td class='elo-high'>1614</td></tr>
-<tr><td class='pnum'>2</td><td class='pname'>Sialetili Faeamani</td><td class='ppos'>Winger</td><td class='elo-mid'>1509</td></tr>
-<tr><td class='pnum'>3</td><td class='pname'>Jojo Fifita</td><td class='ppos'>Centre</td><td class='elo-high'>1645</td></tr>
-<tr><td class='pnum'>4</td><td class='pname'>AJ Brimson</td><td class='ppos'>Centre</td><td class='elo-high'>1716</td></tr>
-<tr><td class='pnum'>5</td><td class='pname'>Phillip Sami</td><td class='ppos'>Winger</td><td class='elo-high'>1914</td></tr>
-<tr><td class='pnum'>6</td><td class='pname'>Lachlan Ilias</td><td class='ppos'>Five-Eighth</td><td class='elo-high'>1639</td></tr>
-<tr><td class='pnum'>7</td><td class='pname'>Jayden Campbell</td><td class='ppos'>Halfback</td><td class='elo-high'>1733</td></tr>
-<tr><td class='pnum'>8</td><td class='pname'>Klese Haas</td><td class='ppos'>Prop</td><td class='elo-low'>1388</td></tr>
-<tr><td class='pnum'>9</td><td class='pname'>Sam Verrills</td><td class='ppos'>Hooker</td><td class='elo-high'>1707</td></tr>
-<tr><td class='pnum'>10</td><td class='pname'>Tino Fa'asuamaleaui</td><td class='ppos'>Prop</td><td class='elo-high'>1984</td></tr>
-<tr><td class='pnum'>11</td><td class='pname'>Arama Hau</td><td class='ppos'>2nd Row</td><td class='elo-high'>1555</td></tr>
-<tr><td class='pnum'>12</td><td class='pname'>Beau Fermor</td><td class='ppos'>2nd Row</td><td class='elo-high'>1785</td></tr>
-<tr><td class='pnum'>13</td><td class='pname'>Chris Randall</td><td class='ppos'>Lock</td><td class='elo-high'>1689</td></tr>
-<tr><td class='pnum'>14</td><td class='pname'>Kurtis Morrin</td><td class='ppos'>Interchange</td><td class='elo-low'>1350</td></tr>
-<tr><td class='pnum'>15</td><td class='pname'>Cooper Bai</td><td class='ppos'>Interchange</td><td class='elo-mid'>1531</td></tr>
-<tr><td class='pnum'>16</td><td class='pname'>Moeaki Fotuaika</td><td class='ppos'>Interchange</td><td class='elo-high'>1946</td></tr>
-<tr><td class='pnum'>17</td><td class='pname'>Oliver Pascoe</td><td class='ppos'>Interchange</td><td class='elo-mid'>1517</td></tr>
-<tr><td class='pnum'>18</td><td class='pname'>Max Feagai</td><td class='ppos'>Interchange</td><td class='elo-mid'>1537</td></tr>
-<tr><td class='pnum'>19</td><td class='pname'>Jett Liu</td><td class='ppos'>Interchange</td><td class='elo-mid'>1500</td></tr>
-</tbody><tfoot><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;padding-top:4px;'>Player avg ELO</td><td class='elo-high'>1645</td></tr><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;'>Team ELO</td><td class='elo-low'>1253</td></tr></tfoot></table></div><div class="squad-side"><h3>Broncos</h3><table class='squad-table'><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>ELO</th></tr></thead><tbody><tr><td class='pnum'>1</td><td class='pname'>Reece Walsh</td><td class='ppos'>Fullback</td><td class='elo-high'>2031</td></tr>
-<tr><td class='pnum'>2</td><td class='pname'>Deine Mariner</td><td class='ppos'>Winger</td><td class='elo-high'>1754</td></tr>
-<tr><td class='pnum'>3</td><td class='pname'>Kotoni Staggs</td><td class='ppos'>Centre</td><td class='elo-high'>2055</td></tr>
-<tr><td class='pnum'>4</td><td class='pname'>Gehamat Shibasaki</td><td class='ppos'>Centre</td><td class='elo-high'>1684</td></tr>
-<tr><td class='pnum'>5</td><td class='pname'>Jesse Arthars</td><td class='ppos'>Winger</td><td class='elo-high'>1884</td></tr>
-<tr><td class='pnum'>6</td><td class='pname'>Ezra Mam</td><td class='ppos'>Five-Eighth</td><td class='elo-high'>1966</td></tr>
-<tr><td class='pnum'>7</td><td class='pname'>Adam Reynolds</td><td class='ppos'>Halfback</td><td class='elo-high'>2596</td></tr>
-<tr><td class='pnum'>8</td><td class='pname'>Corey Jensen</td><td class='ppos'>Prop</td><td class='elo-high'>1920</td></tr>
-<tr><td class='pnum'>9</td><td class='pname'>Cory Paix</td><td class='ppos'>Hooker</td><td class='elo-mid'>1478</td></tr>
-<tr><td class='pnum'>10</td><td class='pname'>Payne Haas</td><td class='ppos'>Prop</td><td class='elo-high'>2551</td></tr>
-<tr><td class='pnum'>11</td><td class='pname'>Brendan Piakura</td><td class='ppos'>2nd Row</td><td class='elo-high'>1614</td></tr>
-<tr><td class='pnum'>12</td><td class='pname'>Jordan Riki</td><td class='ppos'>2nd Row</td><td class='elo-high'>2016</td></tr>
-<tr><td class='pnum'>13</td><td class='pname'>Patrick Carrigan</td><td class='ppos'>Lock</td><td class='elo-high'>2305</td></tr>
-<tr><td class='pnum'>14</td><td class='pname'>Ben Hunt</td><td class='ppos'>Interchange</td><td class='elo-high'>2098</td></tr>
-<tr><td class='pnum'>15</td><td class='pname'>Xavier Willison</td><td class='ppos'>Interchange</td><td class='elo-high'>1769</td></tr>
-<tr><td class='pnum'>16</td><td class='pname'>Ben Talty</td><td class='ppos'>Interchange</td><td class='elo-low'>1442</td></tr>
-<tr><td class='pnum'>17</td><td class='pname'>Aublix Tawha</td><td class='ppos'>Interchange</td><td class='elo-low'>1441</td></tr>
-<tr><td class='pnum'>18</td><td class='pname'>Jaiyden Hunt</td><td class='ppos'>Interchange</td><td class='elo-low'>1445</td></tr>
-<tr><td class='pnum'>19</td><td class='pname'>Antonio Verhoeven</td><td class='ppos'>Interchange</td><td class='elo-mid'>1500</td></tr>
-</tbody><tfoot><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;padding-top:4px;'>Player avg ELO</td><td class='elo-high'>1871</td></tr><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;'>Team ELO</td><td class='elo-high'>1678</td></tr></tfoot></table></div></div></td></tr>
-<tr class="match-row" onclick="toggleSquad('sq_20261110560')" title="Click to expand squads"><td>5</td><td>Sun 05</td><td class='team'>Sharks</td><td>1.44</td><td class="bk-odds" data-tip="TAB Touch">1.60</td><td class="pos">+0.16</td><td class='team'>Warriors</td><td>3.30</td><td class="bk-odds" data-tip="Neds">2.45</td><td class="neg">-0.85</td><td class='predicted' data-tip='Confidence: Strong Home'>Sharks (H)</td><td class="margin">23&ndash;18</td><td class="line bk-odds" data-tip="TAB Touch">-4.5</td><td class="pos">+0.8</td><td class="result-live">Upcoming</td></tr>
-<tr id="sq_20261110560" class="squad-row" style="display:none;"><td colspan="15" class="squad-cell"><div class="squad-cols"><div class="squad-side"><h3>Sharks</h3><table class='squad-table'><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>ELO</th></tr></thead><tbody><tr><td class='pnum'>1</td><td class='pname'>William Kennedy</td><td class='ppos'>Fullback</td><td class='elo-high'>2095</td></tr>
-<tr><td class='pnum'>2</td><td class='pname'>Sione Katoa</td><td class='ppos'>Winger</td><td class='elo-high'>2241</td></tr>
-<tr><td class='pnum'>3</td><td class='pname'>Jesse Ramien</td><td class='ppos'>Centre</td><td class='elo-high'>2445</td></tr>
-<tr><td class='pnum'>4</td><td class='pname'>KL Iro</td><td class='ppos'>Centre</td><td class='elo-high'>1904</td></tr>
-<tr><td class='pnum'>5</td><td class='pname'>Samuel Stonestreet</td><td class='ppos'>Winger</td><td class='elo-high'>1677</td></tr>
-<tr><td class='pnum'>6</td><td class='pname'>Braydon Trindall</td><td class='ppos'>Five-Eighth</td><td class='elo-high'>1868</td></tr>
-<tr><td class='pnum'>7</td><td class='pname'>Nicholas Hynes</td><td class='ppos'>Halfback</td><td class='elo-high'>2359</td></tr>
-<tr><td class='pnum'>8</td><td class='pname'>Addin Fonua-Blake</td><td class='ppos'>Prop</td><td class='elo-high'>2607</td></tr>
-<tr><td class='pnum'>9</td><td class='pname'>Blayke Brailey</td><td class='ppos'>Hooker</td><td class='elo-high'>2322</td></tr>
-<tr><td class='pnum'>10</td><td class='pname'>Toby Rudolf</td><td class='ppos'>Prop</td><td class='elo-high'>2045</td></tr>
-<tr><td class='pnum'>11</td><td class='pname'>Billy Burns</td><td class='ppos'>2nd Row</td><td class='elo-mid'>1546</td></tr>
-<tr><td class='pnum'>12</td><td class='pname'>Teig Wilton</td><td class='ppos'>2nd Row</td><td class='elo-high'>2047</td></tr>
-<tr><td class='pnum'>13</td><td class='pname'>Jesse Colquhoun</td><td class='ppos'>Lock</td><td class='elo-high'>1556</td></tr>
-<tr><td class='pnum'>14</td><td class='pname'>Siosifa Talakai</td><td class='ppos'>Interchange</td><td class='elo-high'>2026</td></tr>
-<tr><td class='pnum'>15</td><td class='pname'>Thomas Hazelton</td><td class='ppos'>Interchange</td><td class='elo-high'>1833</td></tr>
-<tr><td class='pnum'>16</td><td class='pname'>Oregon Kaufusi</td><td class='ppos'>Interchange</td><td class='elo-high'>1988</td></tr>
-<tr><td class='pnum'>17</td><td class='pname'>Braden Uele</td><td class='ppos'>Interchange</td><td class='elo-high'>1901</td></tr>
-<tr><td class='pnum'>18</td><td class='pname'>Mawene Hiroti</td><td class='ppos'>Interchange</td><td class='elo-mid'>1514</td></tr>
-<tr><td class='pnum'>19</td><td class='pname'>Hohepa Puru</td><td class='ppos'>Interchange</td><td class='elo-low'>1447</td></tr>
-</tbody><tfoot><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;padding-top:4px;'>Player avg ELO</td><td class='elo-high'>1970</td></tr><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;'>Team ELO</td><td class='elo-high'>1641</td></tr></tfoot></table></div><div class="squad-side"><h3>Warriors</h3><table class='squad-table'><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>ELO</th></tr></thead><tbody><tr><td class='pnum'>1</td><td class='pname'>Taine Tuaupiki</td><td class='ppos'>Fullback</td><td class='elo-high'>1732</td></tr>
-<tr><td class='pnum'>2</td><td class='pname'>Dallin Watene-Zelezniak</td><td class='ppos'>Winger</td><td class='elo-high'>2074</td></tr>
-<tr><td class='pnum'>3</td><td class='pname'>Charnze Nicoll-Klokstad</td><td class='ppos'>Centre</td><td class='elo-high'>2177</td></tr>
-<tr><td class='pnum'>4</td><td class='pname'>Adam Pompey</td><td class='ppos'>Centre</td><td class='elo-high'>1976</td></tr>
-<tr><td class='pnum'>5</td><td class='pname'>Roger Tuivasa-Sheck</td><td class='ppos'>Winger</td><td class='elo-high'>1997</td></tr>
-<tr><td class='pnum'>6</td><td class='pname'>Luke Metcalf</td><td class='ppos'>Five-Eighth</td><td class='elo-high'>1712</td></tr>
-<tr><td class='pnum'>7</td><td class='pname'>Tanah Boyd</td><td class='ppos'>Halfback</td><td class='elo-high'>1564</td></tr>
-<tr><td class='pnum'>8</td><td class='pname'>James Fisher-Harris</td><td class='ppos'>Prop</td><td class='elo-high'>2947</td></tr>
-<tr><td class='pnum'>9</td><td class='pname'>Wayde Egan</td><td class='ppos'>Hooker</td><td class='elo-high'>2173</td></tr>
-<tr><td class='pnum'>10</td><td class='pname'>Jackson Ford</td><td class='ppos'>Prop</td><td class='elo-high'>1889</td></tr>
-<tr><td class='pnum'>11</td><td class='pname'>Leka Halasima</td><td class='ppos'>2nd Row</td><td class='elo-high'>1710</td></tr>
-<tr><td class='pnum'>12</td><td class='pname'>Jacob Laban</td><td class='ppos'>2nd Row</td><td class='elo-high'>1600</td></tr>
-<tr><td class='pnum'>13</td><td class='pname'>Erin Clark</td><td class='ppos'>Lock</td><td class='elo-high'>1873</td></tr>
-<tr><td class='pnum'>14</td><td class='pname'>Sam Healey</td><td class='ppos'>Interchange</td><td class='elo-high'>1560</td></tr>
-<tr><td class='pnum'>15</td><td class='pname'>Marata Niukore</td><td class='ppos'>Interchange</td><td class='elo-high'>2025</td></tr>
-<tr><td class='pnum'>16</td><td class='pname'>Demitric Vaimauga</td><td class='ppos'>Interchange</td><td class='elo-mid'>1467</td></tr>
-<tr><td class='pnum'>17</td><td class='pname'>Tanner Stowers-Smith</td><td class='ppos'>Interchange</td><td class='elo-mid'>1502</td></tr>
-<tr><td class='pnum'>18</td><td class='pname'>Chanel Harris-Tavita</td><td class='ppos'>Interchange</td><td class='elo-high'>1625</td></tr>
-</tbody><tfoot><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;padding-top:4px;'>Player avg ELO</td><td class='elo-high'>1867</td></tr><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;'>Team ELO</td><td class='elo-mid'>1534</td></tr></tfoot></table></div></div></td></tr>
-<tr class="match-row" onclick="toggleSquad('sq_20261110570')" title="Click to expand squads"><td>5</td><td>Sun 05</td><td class='team'>Knights</td><td>1.84</td><td class="bk-odds" data-tip="TAB Touch">2.40</td><td class="value">&#9733; +0.56</td><td class='team'>Raiders</td><td>2.19</td><td class="bk-odds" data-tip="TAB">1.60</td><td class="neg">-0.59</td><td class='predicted' data-tip='Confidence: Lean Home'>Knights (H)</td><td class="margin">24&ndash;20</td><td class="line bk-odds" data-tip="TAB Touch">+4.5</td><td class="pos">+8.0</td><td class="result-live">Upcoming</td></tr>
-<tr id="sq_20261110570" class="squad-row" style="display:none;"><td colspan="15" class="squad-cell"><div class="squad-cols"><div class="squad-side"><h3>Knights</h3><table class='squad-table'><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>ELO</th></tr></thead><tbody><tr><td class='pnum'>1</td><td class='pname'>Fletcher Hunt</td><td class='ppos'>Fullback</td><td class='elo-high'>1586</td></tr>
-<tr><td class='pnum'>2</td><td class='pname'>Dominic Young</td><td class='ppos'>Winger</td><td class='elo-high'>2125</td></tr>
-<tr><td class='pnum'>3</td><td class='pname'>Dane Gagai</td><td class='ppos'>Centre</td><td class='elo-high'>2424</td></tr>
-<tr><td class='pnum'>4</td><td class='pname'>Bradman Best</td><td class='ppos'>Centre</td><td class='elo-high'>2188</td></tr>
-<tr><td class='pnum'>5</td><td class='pname'>Greg Marzhew</td><td class='ppos'>Winger</td><td class='elo-high'>2232</td></tr>
-<tr><td class='pnum'>6</td><td class='pname'>Fletcher Sharpe</td><td class='ppos'>Five-Eighth</td><td class='elo-high'>1702</td></tr>
-<tr><td class='pnum'>7</td><td class='pname'>Sandon Smith</td><td class='ppos'>Halfback</td><td class='elo-high'>1590</td></tr>
-<tr><td class='pnum'>8</td><td class='pname'>Jacob Saifiti</td><td class='ppos'>Prop</td><td class='elo-high'>1930</td></tr>
-<tr><td class='pnum'>9</td><td class='pname'>Phoenix Crossland</td><td class='ppos'>Hooker</td><td class='elo-mid'>1508</td></tr>
-<tr><td class='pnum'>10</td><td class='pname'>Trey Mooney</td><td class='ppos'>Prop</td><td class='elo-high'>1625</td></tr>
-<tr><td class='pnum'>11</td><td class='pname'>Dylan Lucas</td><td class='ppos'>2nd Row</td><td class='elo-high'>1964</td></tr>
-<tr><td class='pnum'>12</td><td class='pname'>Jermaine McEwen</td><td class='ppos'>2nd Row</td><td class='elo-mid'>1526</td></tr>
-<tr><td class='pnum'>13</td><td class='pname'>Mat Croker</td><td class='ppos'>Lock</td><td class='elo-high'>1700</td></tr>
-<tr><td class='pnum'>14</td><td class='pname'>Harrison Graham</td><td class='ppos'>Interchange</td><td class='elo-mid'>1492</td></tr>
-<tr><td class='pnum'>15</td><td class='pname'>Tyson Frizell</td><td class='ppos'>Interchange</td><td class='elo-high'>2339</td></tr>
-<tr><td class='pnum'>16</td><td class='pname'>Pasami Saulo</td><td class='ppos'>Interchange</td><td class='elo-low'>1333</td></tr>
-<tr><td class='pnum'>17</td><td class='pname'>Thomas Cant</td><td class='ppos'>Interchange</td><td class='elo-mid'>1472</td></tr>
-<tr><td class='pnum'>18</td><td class='pname'>Tyson Gamble</td><td class='ppos'>Interchange</td><td class='elo-high'>1748</td></tr>
-<tr><td class='pnum'>19</td><td class='pname'>Wilson De Courcey</td><td class='ppos'>Interchange</td><td class='elo-mid'>1500</td></tr>
-</tbody><tfoot><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;padding-top:4px;'>Player avg ELO</td><td class='elo-high'>1789</td></tr><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;'>Team ELO</td><td class='elo-low'>1416</td></tr></tfoot></table></div><div class="squad-side"><h3>Raiders</h3><table class='squad-table'><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>ELO</th></tr></thead><tbody><tr><td class='pnum'>1</td><td class='pname'>Kaeo Weekes</td><td class='ppos'>Fullback</td><td class='elo-high'>1649</td></tr>
-<tr><td class='pnum'>2</td><td class='pname'>Savelio Tamale</td><td class='ppos'>Winger</td><td class='elo-high'>1626</td></tr>
-<tr><td class='pnum'>3</td><td class='pname'>Simi Sasagi</td><td class='ppos'>Centre</td><td class='elo-mid'>1458</td></tr>
-<tr><td class='pnum'>4</td><td class='pname'>Sebastian Kris</td><td class='ppos'>Centre</td><td class='elo-high'>1929</td></tr>
-<tr><td class='pnum'>5</td><td class='pname'>Xavier Savage</td><td class='ppos'>Winger</td><td class='elo-high'>1883</td></tr>
-<tr><td class='pnum'>6</td><td class='pname'>Ethan Strange</td><td class='ppos'>Five-Eighth</td><td class='elo-high'>1591</td></tr>
-<tr><td class='pnum'>7</td><td class='pname'>Ethan Sanders</td><td class='ppos'>Halfback</td><td class='elo-mid'>1532</td></tr>
-<tr><td class='pnum'>8</td><td class='pname'>Josh Papalii</td><td class='ppos'>Prop</td><td class='elo-high'>2567</td></tr>
-<tr><td class='pnum'>9</td><td class='pname'>Tom Starling</td><td class='ppos'>Hooker</td><td class='elo-low'>1443</td></tr>
-<tr><td class='pnum'>10</td><td class='pname'>Joseph Tapine</td><td class='ppos'>Prop</td><td class='elo-high'>2581</td></tr>
-<tr><td class='pnum'>11</td><td class='pname'>Hudson Young</td><td class='ppos'>2nd Row</td><td class='elo-high'>2343</td></tr>
-<tr><td class='pnum'>12</td><td class='pname'>Noah Martin</td><td class='ppos'>2nd Row</td><td class='elo-mid'>1507</td></tr>
-<tr><td class='pnum'>13</td><td class='pname'>Corey Horsburgh</td><td class='ppos'>Lock</td><td class='elo-high'>1959</td></tr>
-<tr><td class='pnum'>14</td><td class='pname'>Jayden Brailey</td><td class='ppos'>Interchange</td><td class='elo-high'>1689</td></tr>
-<tr><td class='pnum'>15</td><td class='pname'>Zac Hosking</td><td class='ppos'>Interchange</td><td class='elo-high'>1821</td></tr>
-<tr><td class='pnum'>16</td><td class='pname'>Ata Mariota</td><td class='ppos'>Interchange</td><td class='elo-high'>1614</td></tr>
-<tr><td class='pnum'>17</td><td class='pname'>Morgan Smithies</td><td class='ppos'>Interchange</td><td class='elo-high'>1766</td></tr>
-<tr><td class='pnum'>18</td><td class='pname'>Chevy Stewart</td><td class='ppos'>Interchange</td><td class='elo-mid'>1491</td></tr>
-<tr><td class='pnum'>19</td><td class='pname'>Matthew Timoko</td><td class='ppos'>Interchange</td><td class='elo-high'>2163</td></tr>
-</tbody><tfoot><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;padding-top:4px;'>Player avg ELO</td><td class='elo-high'>1822</td></tr><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;'>Team ELO</td><td class='elo-low'>1431</td></tr></tfoot></table></div></div></td></tr>
-<tr class="match-row" onclick="toggleSquad('sq_20261110580')" title="Click to expand squads"><td>5</td><td>Mon 06</td><td class='team'>Eels</td><td>1.70</td><td class="bk-odds" data-tip="TAB">1.70</td><td class="pos">+0.00</td><td class='team'>Wests Tigers</td><td>2.43</td><td class="bk-odds" data-tip="TAB Touch">2.20</td><td class="neg">-0.23</td><td class='predicted' data-tip='Confidence: Lean Home'>Eels (H)</td><td class="margin">24&ndash;23</td><td class="line bk-odds" data-tip="TAB">-2.5</td><td class="pos">+0.4</td><td class="result-live">Upcoming</td></tr>
-<tr id="sq_20261110580" class="squad-row" style="display:none;"><td colspan="15" class="squad-cell"><div class="squad-cols"><div class="squad-side"><h3>Eels</h3><table class='squad-table'><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>ELO</th></tr></thead><tbody><tr><td class='pnum'>1</td><td class='pname'>Joash Papalii</td><td class='ppos'>Fullback</td><td class='elo-low'>1444</td></tr>
-<tr><td class='pnum'>2</td><td class='pname'>Bailey Simonsson</td><td class='ppos'>Winger</td><td class='elo-high'>1804</td></tr>
-<tr><td class='pnum'>3</td><td class='pname'>Brian Kelly</td><td class='ppos'>Centre</td><td class='elo-high'>1970</td></tr>
-<tr><td class='pnum'>4</td><td class='pname'>Sean Russell</td><td class='ppos'>Centre</td><td class='elo-high'>1641</td></tr>
-<tr><td class='pnum'>5</td><td class='pname'>Josh Addo-Carr</td><td class='ppos'>Winger</td><td class='elo-high'>2268</td></tr>
-<tr><td class='pnum'>6</td><td class='pname'>Jonah Pezet</td><td class='ppos'>Five-Eighth</td><td class='elo-high'>1676</td></tr>
-<tr><td class='pnum'>7</td><td class='pname'>Mitchell Moses</td><td class='ppos'>Halfback</td><td class='elo-high'>2227</td></tr>
-<tr><td class='pnum'>8</td><td class='pname'>Jack Williams</td><td class='ppos'>Prop</td><td class='elo-high'>1884</td></tr>
-<tr><td class='pnum'>9</td><td class='pname'>Ryley Smith</td><td class='ppos'>Hooker</td><td class='elo-low'>1351</td></tr>
-<tr><td class='pnum'>10</td><td class='pname'>Junior Paulo</td><td class='ppos'>Prop</td><td class='elo-high'>2385</td></tr>
-<tr><td class='pnum'>11</td><td class='pname'>Kelma Tuilagi</td><td class='ppos'>2nd Row</td><td class='elo-high'>1556</td></tr>
-<tr><td class='pnum'>12</td><td class='pname'>Kitione Kautoga</td><td class='ppos'>2nd Row</td><td class='elo-mid'>1483</td></tr>
-<tr><td class='pnum'>13</td><td class='pname'>Dylan Walker</td><td class='ppos'>Lock</td><td class='elo-high'>1978</td></tr>
-<tr><td class='pnum'>14</td><td class='pname'>Tallyn Da Silva</td><td class='ppos'>Interchange</td><td class='elo-low'>1285</td></tr>
-<tr><td class='pnum'>15</td><td class='pname'>Sam Tuivaiti</td><td class='ppos'>Interchange</td><td class='elo-mid'>1462</td></tr>
-<tr><td class='pnum'>16</td><td class='pname'>Charlie Guymer</td><td class='ppos'>Interchange</td><td class='elo-low'>1419</td></tr>
-<tr><td class='pnum'>17</td><td class='pname'>Luca Moretti</td><td class='ppos'>Interchange</td><td class='elo-mid'>1452</td></tr>
-<tr><td class='pnum'>18</td><td class='pname'>Jack De Belin</td><td class='ppos'>Interchange</td><td class='elo-high'>2086</td></tr>
-<tr><td class='pnum'>19</td><td class='pname'>Apa Twidle</td><td class='ppos'>Interchange</td><td class='elo-mid'>1500</td></tr>
-</tbody><tfoot><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;padding-top:4px;'>Player avg ELO</td><td class='elo-high'>1730</td></tr><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;'>Team ELO</td><td class='elo-mid'>1535</td></tr></tfoot></table></div><div class="squad-side"><h3>Wests Tigers</h3><table class='squad-table'><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>ELO</th></tr></thead><tbody><tr><td class='pnum'>1</td><td class='pname'>Jahream Bula</td><td class='ppos'>Fullback</td><td class='elo-high'>1604</td></tr>
-<tr><td class='pnum'>2</td><td class='pname'>Faaletino Tavana</td><td class='ppos'>Winger</td><td class='elo-mid'>1529</td></tr>
-<tr><td class='pnum'>3</td><td class='pname'>Sunia Turuva</td><td class='ppos'>Centre</td><td class='elo-high'>2161</td></tr>
-<tr><td class='pnum'>4</td><td class='pname'>Heamasi Makasini</td><td class='ppos'>Centre</td><td class='elo-high'>1574</td></tr>
-<tr><td class='pnum'>5</td><td class='pname'>Luke Laulilii</td><td class='ppos'>Winger</td><td class='elo-high'>1602</td></tr>
-<tr><td class='pnum'>6</td><td class='pname'>Jock Madden</td><td class='ppos'>Five-Eighth</td><td class='elo-high'>1583</td></tr>
-<tr><td class='pnum'>7</td><td class='pname'>Adam Doueihi</td><td class='ppos'>Halfback</td><td class='elo-high'>1846</td></tr>
-<tr><td class='pnum'>8</td><td class='pname'>Terrell May</td><td class='ppos'>Prop</td><td class='elo-high'>2298</td></tr>
-<tr><td class='pnum'>9</td><td class='pname'>Apisai Koroisau</td><td class='ppos'>Hooker</td><td class='elo-high'>2293</td></tr>
-<tr><td class='pnum'>10</td><td class='pname'>Fonua Pole</td><td class='ppos'>Prop</td><td class='elo-high'>1613</td></tr>
-<tr><td class='pnum'>11</td><td class='pname'>Samuela Fainu</td><td class='ppos'>2nd Row</td><td class='elo-high'>1667</td></tr>
-<tr><td class='pnum'>12</td><td class='pname'>Kai Pearce-Paul</td><td class='ppos'>2nd Row</td><td class='elo-high'>1839</td></tr>
-<tr><td class='pnum'>13</td><td class='pname'>Alex Twal</td><td class='ppos'>Lock</td><td class='elo-high'>1992</td></tr>
-<tr><td class='pnum'>14</td><td class='pname'>Latu Fainu</td><td class='ppos'>Interchange</td><td class='elo-low'>1407</td></tr>
-<tr><td class='pnum'>15</td><td class='pname'>Sione Fainu</td><td class='ppos'>Interchange</td><td class='elo-high'>1585</td></tr>
-<tr><td class='pnum'>16</td><td class='pname'>Royce Hunt</td><td class='ppos'>Interchange</td><td class='elo-high'>1840</td></tr>
-<tr><td class='pnum'>17</td><td class='pname'>Alex Seyfarth</td><td class='ppos'>Interchange</td><td class='elo-low'>1320</td></tr>
-<tr><td class='pnum'>18</td><td class='pname'>Bunty Afoa</td><td class='ppos'>Interchange</td><td class='elo-high'>1750</td></tr>
-<tr><td class='pnum'>19</td><td class='pname'>Jeral Skelton</td><td class='ppos'>Interchange</td><td class='elo-high'>1708</td></tr>
-</tbody><tfoot><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;padding-top:4px;'>Player avg ELO</td><td class='elo-high'>1748</td></tr><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;'>Team ELO</td><td class='elo-mid'>1461</td></tr></tfoot></table></div></div></td></tr>
+<tr class="match-row" onclick="toggleSquad('sq_20261110610')" title="Click to expand squads"><td>6</td><td>Thu 09</td><td class='team'>Bulldogs</td><td>4.94</td><td class="bk-odds" data-tip="Sportsbet">5.80</td><td class="pos">+0.86</td><td class='team'>Panthers</td><td>1.25</td><td class="bk-odds" data-tip="TAB Touch">1.17</td><td class="neg">-0.08</td><td class='predicted'>Panthers (A)</td><td class="margin" style="padding:0 6px;"><svg width="180" height="28" style="display:block;margin:0 auto;"><rect width="180" height="28" fill="#1a1d2a" rx="3"/><rect x="33.7" width="73.4" y="4" height="20" fill="#e57373" opacity="0.25"/><line x1="90" y1="2" x2="90" y2="26" stroke="#444" stroke-width="1"/><circle cx="70.4" cy="14" r="4" fill="#e57373"/><text x="90" y="20" text-anchor="middle" fill="#ccc" font-size="10" font-family="monospace">16&ndash;25</text></svg></td><td class="line bk-odds" data-tip="TAB">+17.5</td><td class="pos">+8.8</td><td class="result-live">Upcoming</td></tr>
+<tr id="sq_20261110610" class="squad-row" style="display:none;"><td colspan="15" class="squad-cell"><div class="squad-cols"><div class="squad-side"><h3>Bulldogs</h3><table class='squad-table'><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>ELO</th></tr></thead><tbody><tr><td class='pnum'>1</td><td class='pname'>Connor Tracey</td><td class='ppos'>Fullback</td><td class='elo-5'>2131</td></tr>
+<tr><td class='pnum'>2</td><td class='pname'>Jacob Kiraz</td><td class='ppos'>Winger</td><td class='elo-4'>1935</td></tr>
+<tr><td class='pnum'>3</td><td class='pname'>Enari Tuala</td><td class='ppos'>Centre</td><td class='elo-4'>1842</td></tr>
+<tr><td class='pnum'>4</td><td class='pname'>Bronson Xerri</td><td class='ppos'>Centre</td><td class='elo-4'>1890</td></tr>
+<tr><td class='pnum'>5</td><td class='pname'>Marcelo Montoya</td><td class='ppos'>Winger</td><td class='elo-4'>1985</td></tr>
+<tr><td class='pnum'>6</td><td class='pname'>Matt Burton</td><td class='ppos'>Five-Eighth</td><td class='elo-5'>2326</td></tr>
+<tr><td class='pnum'>7</td><td class='pname'>Lachlan Galvin</td><td class='ppos'>Halfback</td><td class='elo-3'>1717</td></tr>
+<tr><td class='pnum'>8</td><td class='pname'>Max King</td><td class='ppos'>Prop</td><td class='elo-4'>2073</td></tr>
+<tr><td class='pnum'>9</td><td class='pname'>Bailey Hayward</td><td class='ppos'>Hooker</td><td class='elo-2'>1517</td></tr>
+<tr><td class='pnum'>10</td><td class='pname'>Samuel Hughes</td><td class='ppos'>Prop</td><td class='elo-2'>1548</td></tr>
+<tr><td class='pnum'>11</td><td class='pname'>Viliame Kikau</td><td class='ppos'>2nd Row</td><td class='elo-5'>2470</td></tr>
+<tr><td class='pnum'>12</td><td class='pname'>Jacob Preston</td><td class='ppos'>2nd Row</td><td class='elo-4'>1942</td></tr>
+<tr><td class='pnum'>13</td><td class='pname'>Jaeman Salmon</td><td class='ppos'>Lock</td><td class='elo-3'>1696</td></tr>
+<tr><td class='pnum'>14</td><td class='pname'>Kurt Mann</td><td class='ppos'>Interchange</td><td class='elo-4'>2023</td></tr>
+<tr><td class='pnum'>15</td><td class='pname'>Sitili Tupouniua</td><td class='ppos'>Interchange</td><td class='elo-4'>1927</td></tr>
+<tr><td class='pnum'>16</td><td class='pname'>Harry Hayes</td><td class='ppos'>Interchange</td><td class='elo-3'>1731</td></tr>
+<tr><td class='pnum'>17</td><td class='pname'>Sean O'Sullivan</td><td class='ppos'>Interchange</td><td class='elo-2'>1536</td></tr>
+<tr><td class='pnum'>19</td><td class='pname'>Jake Turpin</td><td class='ppos'>Interchange</td><td class='elo-1'>1435</td></tr>
+</tbody><tfoot><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;padding-top:4px;'>Player avg ELO</td><td class='elo-4'>1874</td></tr><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;'>Team ELO</td><td class='elo-1'>1420</td></tr></tfoot></table></div><div class="squad-side"><h3>Panthers</h3><table class='squad-table'><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>ELO</th></tr></thead><tbody><tr><td class='pnum'>1</td><td class='pname'>Dylan Edwards</td><td class='ppos'>Fullback</td><td class='elo-5'>2957</td></tr>
+<tr><td class='pnum'>2</td><td class='pname'>Thomas Jenkins</td><td class='ppos'>Winger</td><td class='elo-3'>1746</td></tr>
+<tr><td class='pnum'>3</td><td class='pname'>Paul Alamoti</td><td class='ppos'>Centre</td><td class='elo-4'>1932</td></tr>
+<tr><td class='pnum'>4</td><td class='pname'>Casey McLean</td><td class='ppos'>Centre</td><td class='elo-3'>1765</td></tr>
+<tr><td class='pnum'>5</td><td class='pname'>Brian To'o</td><td class='ppos'>Winger</td><td class='elo-5'>2793</td></tr>
+<tr><td class='pnum'>6</td><td class='pname'>Blaize Talagi</td><td class='ppos'>Five-Eighth</td><td class='elo-3'>1691</td></tr>
+<tr><td class='pnum'>7</td><td class='pname'>Nathan Cleary</td><td class='ppos'>Halfback</td><td class='elo-5'>2894</td></tr>
+<tr><td class='pnum'>8</td><td class='pname'>Moses Leota</td><td class='ppos'>Prop</td><td class='elo-5'>2409</td></tr>
+<tr><td class='pnum'>9</td><td class='pname'>Mitch Kenny</td><td class='ppos'>Hooker</td><td class='elo-5'>2186</td></tr>
+<tr><td class='pnum'>10</td><td class='pname'>Lindsay Smith</td><td class='ppos'>Prop</td><td class='elo-5'>2165</td></tr>
+<tr><td class='pnum'>11</td><td class='pname'>Isaiah Papali'i</td><td class='ppos'>2nd Row</td><td class='elo-5'>2293</td></tr>
+<tr><td class='pnum'>12</td><td class='pname'>Liam Martin</td><td class='ppos'>2nd Row</td><td class='elo-5'>2488</td></tr>
+<tr><td class='pnum'>13</td><td class='pname'>Isaah Yeo</td><td class='ppos'>Lock</td><td class='elo-5'>3194</td></tr>
+<tr><td class='pnum'>14</td><td class='pname'>Jack Cogger</td><td class='ppos'>Interchange</td><td class='elo-3'>1738</td></tr>
+<tr><td class='pnum'>15</td><td class='pname'>Billy Phillips</td><td class='ppos'>Interchange</td><td class='elo-3'>1687</td></tr>
+<tr><td class='pnum'>16</td><td class='pname'>Scott Sorensen</td><td class='ppos'>Interchange</td><td class='elo-5'>2320</td></tr>
+<tr><td class='pnum'>17</td><td class='pname'>Luke Garner</td><td class='ppos'>Interchange</td><td class='elo-4'>2006</td></tr>
+<tr><td class='pnum'>18</td><td class='pname'>Izack Tago</td><td class='ppos'>Interchange</td><td class='elo-5'>2168</td></tr>
+<tr><td class='pnum'>19</td><td class='pname'>Freddy Lussick</td><td class='ppos'>Interchange</td><td class='elo-2'>1503</td></tr>
+</tbody><tfoot><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;padding-top:4px;'>Player avg ELO</td><td class='elo-5'>2207</td></tr><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;'>Team ELO</td><td class='elo-4'>1899</td></tr></tfoot></table></div></div></td></tr>
+<tr class="match-row" onclick="toggleSquad('sq_20261110620')" title="Click to expand squads"><td>6</td><td>Fri 10</td><td class='team'>Dragons</td><td>2.48</td><td class="bk-odds" data-tip="Sportsbet">2.90</td><td class="pos">+0.42</td><td class='team'>Sea Eagles</td><td>1.68</td><td class="bk-odds" data-tip="Ladbrokes">1.44</td><td class="neg">-0.24</td><td class='predicted'>Sea Eagles (A)</td><td class="margin" style="padding:0 6px;"><svg width="180" height="28" style="display:block;margin:0 auto;"><rect width="180" height="28" fill="#1a1d2a" rx="3"/><rect x="50.7" width="73.4" y="4" height="20" fill="#e57373" opacity="0.25"/><line x1="90" y1="2" x2="90" y2="26" stroke="#444" stroke-width="1"/><circle cx="87.4" cy="14" r="4" fill="#e57373"/><text x="90" y="20" text-anchor="middle" fill="#ccc" font-size="10" font-family="monospace">23&ndash;24</text></svg></td><td class="line bk-odds" data-tip="Sportsbet">+7.5</td><td class="pos">+6.3</td><td class="result-live">Upcoming</td></tr>
+<tr id="sq_20261110620" class="squad-row" style="display:none;"><td colspan="15" class="squad-cell"><div class="squad-cols"><div class="squad-side"><h3>Dragons</h3><table class='squad-table'><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>ELO</th></tr></thead><tbody><tr><td class='pnum'>1</td><td class='pname'>Tyrell Sloan</td><td class='ppos'>Fullback</td><td class='elo-3'>1700</td></tr>
+<tr><td class='pnum'>2</td><td class='pname'>Christian Tuipulotu</td><td class='ppos'>Winger</td><td class='elo-3'>1695</td></tr>
+<tr><td class='pnum'>3</td><td class='pname'>Moses Suli</td><td class='ppos'>Centre</td><td class='elo-4'>2098</td></tr>
+<tr><td class='pnum'>4</td><td class='pname'>Valentine Holmes</td><td class='ppos'>Centre</td><td class='elo-5'>2385</td></tr>
+<tr><td class='pnum'>5</td><td class='pname'>Setu Tu</td><td class='ppos'>Winger</td><td class='elo-1'>1481</td></tr>
+<tr><td class='pnum'>6</td><td class='pname'>Daniel Atkinson</td><td class='ppos'>Five-Eighth</td><td class='elo-2'>1523</td></tr>
+<tr><td class='pnum'>7</td><td class='pname'>Kyle Flanagan</td><td class='ppos'>Halfback</td><td class='elo-2'>1537</td></tr>
+<tr><td class='pnum'>8</td><td class='pname'>Emre Guler</td><td class='ppos'>Prop</td><td class='elo-3'>1618</td></tr>
+<tr><td class='pnum'>9</td><td class='pname'>Damien Cook</td><td class='ppos'>Hooker</td><td class='elo-5'>2544</td></tr>
+<tr><td class='pnum'>10</td><td class='pname'>Toby Couchman</td><td class='ppos'>Prop</td><td class='elo-3'>1664</td></tr>
+<tr><td class='pnum'>11</td><td class='pname'>Luciano Leilua</td><td class='ppos'>2nd Row</td><td class='elo-4'>1963</td></tr>
+<tr><td class='pnum'>12</td><td class='pname'>Jaydn Su'A</td><td class='ppos'>2nd Row</td><td class='elo-4'>2083</td></tr>
+<tr><td class='pnum'>13</td><td class='pname'>Hamish Stewart</td><td class='ppos'>Lock</td><td class='elo-2'>1542</td></tr>
+<tr><td class='pnum'>14</td><td class='pname'>Jacob Liddle</td><td class='ppos'>Interchange</td><td class='elo-3'>1707</td></tr>
+<tr><td class='pnum'>15</td><td class='pname'>Blake Lawrie</td><td class='ppos'>Interchange</td><td class='elo-3'>1698</td></tr>
+<tr><td class='pnum'>16</td><td class='pname'>Jacob Halangahu</td><td class='ppos'>Interchange</td><td class='elo-1'>1463</td></tr>
+<tr><td class='pnum'>17</td><td class='pname'>Josh Kerr</td><td class='ppos'>Interchange</td><td class='elo-2'>1543</td></tr>
+<tr><td class='pnum'>18</td><td class='pname'>Hame Sele</td><td class='ppos'>Interchange</td><td class='elo-3'>1695</td></tr>
+<tr><td class='pnum'>19</td><td class='pname'>Kade Reed</td><td class='ppos'>Interchange</td><td class='elo-2'>1500</td></tr>
+</tbody><tfoot><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;padding-top:4px;'>Player avg ELO</td><td class='elo-3'>1760</td></tr><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;'>Team ELO</td><td class='elo-1'>1170</td></tr></tfoot></table></div><div class="squad-side"><h3>Sea Eagles</h3><table class='squad-table'><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>ELO</th></tr></thead><tbody><tr><td class='pnum'>1</td><td class='pname'>Tom Trbojevic</td><td class='ppos'>Fullback</td><td class='elo-5'>2255</td></tr>
+<tr><td class='pnum'>2</td><td class='pname'>Jason Saab</td><td class='ppos'>Winger</td><td class='elo-4'>2003</td></tr>
+<tr><td class='pnum'>3</td><td class='pname'>Tolutau Koula</td><td class='ppos'>Centre</td><td class='elo-4'>1953</td></tr>
+<tr><td class='pnum'>4</td><td class='pname'>Reuben Garrick</td><td class='ppos'>Centre</td><td class='elo-5'>2171</td></tr>
+<tr><td class='pnum'>5</td><td class='pname'>Lehi Hopoate</td><td class='ppos'>Winger</td><td class='elo-3'>1762</td></tr>
+<tr><td class='pnum'>6</td><td class='pname'>Luke Brooks</td><td class='ppos'>Five-Eighth</td><td class='elo-4'>2104</td></tr>
+<tr><td class='pnum'>7</td><td class='pname'>Jamal Fogarty</td><td class='ppos'>Halfback</td><td class='elo-4'>2037</td></tr>
+<tr><td class='pnum'>8</td><td class='pname'>Taniela Paseka</td><td class='ppos'>Prop</td><td class='elo-5'>2239</td></tr>
+<tr><td class='pnum'>9</td><td class='pname'>Brandon Wakeham</td><td class='ppos'>Hooker</td><td class='elo-1'>1460</td></tr>
+<tr><td class='pnum'>10</td><td class='pname'>Kobe Hetherington</td><td class='ppos'>Prop</td><td class='elo-2'>1555</td></tr>
+<tr><td class='pnum'>11</td><td class='pname'>Haumole Olakau'atu</td><td class='ppos'>2nd Row</td><td class='elo-5'>2387</td></tr>
+<tr><td class='pnum'>12</td><td class='pname'>Ben Trbojevic</td><td class='ppos'>2nd Row</td><td class='elo-3'>1683</td></tr>
+<tr><td class='pnum'>13</td><td class='pname'>Jake Trbojevic</td><td class='ppos'>Lock</td><td class='elo-5'>2141</td></tr>
+<tr><td class='pnum'>14</td><td class='pname'>Jake Simpkin</td><td class='ppos'>Interchange</td><td class='elo-1'>1331</td></tr>
+<tr><td class='pnum'>15</td><td class='pname'>Corey Waddell</td><td class='ppos'>Interchange</td><td class='elo-2'>1572</td></tr>
+<tr><td class='pnum'>16</td><td class='pname'>Ethan Bullemor</td><td class='ppos'>Interchange</td><td class='elo-4'>1941</td></tr>
+<tr><td class='pnum'>17</td><td class='pname'>Simione Laiafi</td><td class='ppos'>Interchange</td><td class='elo-1'>1480</td></tr>
+<tr><td class='pnum'>18</td><td class='pname'>Paul Bryan</td><td class='ppos'>Interchange</td><td class='elo-1'>1442</td></tr>
+<tr><td class='pnum'>19</td><td class='pname'>Clayton Faulalo</td><td class='ppos'>Interchange</td><td class='elo-2'>1551</td></tr>
+</tbody><tfoot><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;padding-top:4px;'>Player avg ELO</td><td class='elo-4'>1846</td></tr><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;'>Team ELO</td><td class='elo-1'>1466</td></tr></tfoot></table></div></div></td></tr>
+<tr class="match-row" onclick="toggleSquad('sq_20261110630')" title="Click to expand squads"><td>6</td><td>Fri 10</td><td class='team'>Broncos</td><td>1.49</td><td class="bk-odds" data-tip="TAB Touch">1.67</td><td class="pos">+0.18</td><td class='team'>Cowboys</td><td>3.06</td><td class="bk-odds" data-tip="Neds">2.35</td><td class="neg">-0.71</td><td class='predicted'>Broncos (H)</td><td class="margin" style="padding:0 6px;"><svg width="180" height="28" style="display:block;margin:0 auto;"><rect width="180" height="28" fill="#1a1d2a" rx="3"/><rect x="69.7" width="73.4" y="4" height="20" fill="#4caf50" opacity="0.25"/><line x1="90" y1="2" x2="90" y2="26" stroke="#444" stroke-width="1"/><circle cx="106.4" cy="14" r="4" fill="#4caf50"/><text x="90" y="20" text-anchor="middle" fill="#ccc" font-size="10" font-family="monospace">26&ndash;19</text></svg></td><td class="line bk-odds" data-tip="Sportsbet">-3.5</td><td class="pos">+3.8</td><td class="result-live">Upcoming</td></tr>
+<tr id="sq_20261110630" class="squad-row" style="display:none;"><td colspan="15" class="squad-cell"><div class="squad-cols"><div class="squad-side"><h3>Broncos</h3><table class='squad-table'><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>ELO</th></tr></thead><tbody><tr><td class='pnum'>1</td><td class='pname'>Jesse Arthars</td><td class='ppos'>Fullback</td><td class='elo-4'>1932</td></tr>
+<tr><td class='pnum'>2</td><td class='pname'>Josiah Karapani</td><td class='ppos'>Winger</td><td class='elo-2'>1509</td></tr>
+<tr><td class='pnum'>3</td><td class='pname'>Kotoni Staggs</td><td class='ppos'>Centre</td><td class='elo-4'>2097</td></tr>
+<tr><td class='pnum'>4</td><td class='pname'>Gehamat Shibasaki</td><td class='ppos'>Centre</td><td class='elo-3'>1712</td></tr>
+<tr><td class='pnum'>5</td><td class='pname'>Deine Mariner</td><td class='ppos'>Winger</td><td class='elo-3'>1769</td></tr>
+<tr><td class='pnum'>6</td><td class='pname'>Ezra Mam</td><td class='ppos'>Five-Eighth</td><td class='elo-4'>2011</td></tr>
+<tr><td class='pnum'>7</td><td class='pname'>Adam Reynolds</td><td class='ppos'>Halfback</td><td class='elo-5'>2611</td></tr>
+<tr><td class='pnum'>8</td><td class='pname'>Corey Jensen</td><td class='ppos'>Prop</td><td class='elo-4'>1935</td></tr>
+<tr><td class='pnum'>9</td><td class='pname'>Cory Paix</td><td class='ppos'>Hooker</td><td class='elo-2'>1523</td></tr>
+<tr><td class='pnum'>10</td><td class='pname'>Payne Haas</td><td class='ppos'>Prop</td><td class='elo-5'>2577</td></tr>
+<tr><td class='pnum'>11</td><td class='pname'>Brendan Piakura</td><td class='ppos'>2nd Row</td><td class='elo-3'>1630</td></tr>
+<tr><td class='pnum'>12</td><td class='pname'>Jordan Riki</td><td class='ppos'>2nd Row</td><td class='elo-4'>2046</td></tr>
+<tr><td class='pnum'>13</td><td class='pname'>Patrick Carrigan</td><td class='ppos'>Lock</td><td class='elo-5'>2350</td></tr>
+<tr><td class='pnum'>14</td><td class='pname'>Blake Mozer</td><td class='ppos'>Interchange</td><td class='elo-1'>1419</td></tr>
+<tr><td class='pnum'>15</td><td class='pname'>Xavier Willison</td><td class='ppos'>Interchange</td><td class='elo-4'>1847</td></tr>
+<tr><td class='pnum'>16</td><td class='pname'>Ben Talty</td><td class='ppos'>Interchange</td><td class='elo-1'>1446</td></tr>
+<tr><td class='pnum'>17</td><td class='pname'>Aublix Tawha</td><td class='ppos'>Interchange</td><td class='elo-1'>1441</td></tr>
+<tr><td class='pnum'>18</td><td class='pname'>Thomas Duffy</td><td class='ppos'>Interchange</td><td class='elo-1'>1476</td></tr>
+<tr><td class='pnum'>19</td><td class='pname'>Hayze Perham</td><td class='ppos'>Interchange</td><td class='elo-2'>1551</td></tr>
+</tbody><tfoot><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;padding-top:4px;'>Player avg ELO</td><td class='elo-4'>1836</td></tr><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;'>Team ELO</td><td class='elo-3'>1687</td></tr></tfoot></table></div><div class="squad-side"><h3>Cowboys</h3><table class='squad-table'><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>ELO</th></tr></thead><tbody><tr><td class='pnum'>1</td><td class='pname'>Scott Drinkwater</td><td class='ppos'>Fullback</td><td class='elo-5'>2344</td></tr>
+<tr><td class='pnum'>2</td><td class='pname'>Braidon Burns</td><td class='ppos'>Winger</td><td class='elo-4'>1832</td></tr>
+<tr><td class='pnum'>3</td><td class='pname'>Jaxon Purdue</td><td class='ppos'>Centre</td><td class='elo-3'>1655</td></tr>
+<tr><td class='pnum'>4</td><td class='pname'>Tom Chester</td><td class='ppos'>Centre</td><td class='elo-2'>1545</td></tr>
+<tr><td class='pnum'>5</td><td class='pname'>Murray Taulagi</td><td class='ppos'>Winger</td><td class='elo-5'>2205</td></tr>
+<tr><td class='pnum'>6</td><td class='pname'>Jake Clifford</td><td class='ppos'>Five-Eighth</td><td class='elo-4'>1815</td></tr>
+<tr><td class='pnum'>7</td><td class='pname'>Tom Dearden</td><td class='ppos'>Halfback</td><td class='elo-4'>2075</td></tr>
+<tr><td class='pnum'>8</td><td class='pname'>Coen Hess</td><td class='ppos'>Prop</td><td class='elo-3'>1748</td></tr>
+<tr><td class='pnum'>9</td><td class='pname'>Reed Mahoney</td><td class='ppos'>Hooker</td><td class='elo-4'>2048</td></tr>
+<tr><td class='pnum'>10</td><td class='pname'>Jason Taumalolo</td><td class='ppos'>Prop</td><td class='elo-5'>2408</td></tr>
+<tr><td class='pnum'>11</td><td class='pname'>Heilum Luki</td><td class='ppos'>2nd Row</td><td class='elo-4'>1954</td></tr>
+<tr><td class='pnum'>12</td><td class='pname'>Kai O'Donnell</td><td class='ppos'>2nd Row</td><td class='elo-2'>1502</td></tr>
+<tr><td class='pnum'>13</td><td class='pname'>Reuben Cotter</td><td class='ppos'>Lock</td><td class='elo-4'>1962</td></tr>
+<tr><td class='pnum'>14</td><td class='pname'>Soni Luke</td><td class='ppos'>Interchange</td><td class='elo-1'>1352</td></tr>
+<tr><td class='pnum'>15</td><td class='pname'>Griffin Neame</td><td class='ppos'>Interchange</td><td class='elo-3'>1724</td></tr>
+<tr><td class='pnum'>16</td><td class='pname'>Thomas Mikaele</td><td class='ppos'>Interchange</td><td class='elo-3'>1805</td></tr>
+<tr><td class='pnum'>17</td><td class='pname'>Matthew Lodge</td><td class='ppos'>Interchange</td><td class='elo-3'>1785</td></tr>
+<tr><td class='pnum'>18</td><td class='pname'>Zac Laybutt</td><td class='ppos'>Interchange</td><td class='elo-2'>1578</td></tr>
+<tr><td class='pnum'>19</td><td class='pname'>Mason Barber</td><td class='ppos'>Interchange</td><td class='elo-2'>1500</td></tr>
+</tbody><tfoot><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;padding-top:4px;'>Player avg ELO</td><td class='elo-4'>1834</td></tr><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;'>Team ELO</td><td class='elo-1'>1431</td></tr></tfoot></table></div></div></td></tr>
+<tr class="match-row" onclick="toggleSquad('sq_20261110640')" title="Click to expand squads"><td>6</td><td>Sat 11</td><td class='team'>Rabbitohs</td><td>1.31</td><td class="bk-odds" data-tip="Sportsbet">1.53</td><td class="value-b">&#9733; +0.22</td><td class='team'>Raiders</td><td>4.18</td><td class="bk-odds" data-tip="TAB Touch">2.63</td><td class="neg">-1.55</td><td class='predicted'>Rabbitohs (H)</td><td class="margin" style="padding:0 6px;"><svg width="180" height="28" style="display:block;margin:0 auto;"><rect width="180" height="28" fill="#1a1d2a" rx="3"/><rect x="65.9" width="73.4" y="4" height="20" fill="#4caf50" opacity="0.25"/><line x1="90" y1="2" x2="90" y2="26" stroke="#444" stroke-width="1"/><circle cx="102.6" cy="14" r="4" fill="#4caf50"/><text x="90" y="20" text-anchor="middle" fill="#ccc" font-size="10" font-family="monospace">25&ndash;19</text></svg></td><td class="line bk-odds" data-tip="Sportsbet">-6.5</td><td class="neg">-0.9</td><td class="result-live">Upcoming</td></tr>
+<tr id="sq_20261110640" class="squad-row" style="display:none;"><td colspan="15" class="squad-cell"><div class="squad-cols"><div class="squad-side"><h3>Rabbitohs</h3><table class='squad-table'><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>ELO</th></tr></thead><tbody><tr><td class='pnum'>1</td><td class='pname'>Jye Gray</td><td class='ppos'>Fullback</td><td class='elo-3'>1670</td></tr>
+<tr><td class='pnum'>2</td><td class='pname'>Alex Johnston</td><td class='ppos'>Winger</td><td class='elo-5'>2547</td></tr>
+<tr><td class='pnum'>3</td><td class='pname'>Latrell Mitchell</td><td class='ppos'>Centre</td><td class='elo-5'>2396</td></tr>
+<tr><td class='pnum'>4</td><td class='pname'>Jack Wighton</td><td class='ppos'>Centre</td><td class='elo-5'>2205</td></tr>
+<tr><td class='pnum'>5</td><td class='pname'>Campbell Graham</td><td class='ppos'>Winger</td><td class='elo-5'>2144</td></tr>
+<tr><td class='pnum'>6</td><td class='pname'>Cody Walker</td><td class='ppos'>Five-Eighth</td><td class='elo-5'>2552</td></tr>
+<tr><td class='pnum'>7</td><td class='pname'>Jamie Humphreys</td><td class='ppos'>Halfback</td><td class='elo-3'>1635</td></tr>
+<tr><td class='pnum'>8</td><td class='pname'>Tevita Tatola</td><td class='ppos'>Prop</td><td class='elo-5'>2145</td></tr>
+<tr><td class='pnum'>9</td><td class='pname'>Brandon Smith</td><td class='ppos'>Hooker</td><td class='elo-5'>2331</td></tr>
+<tr><td class='pnum'>10</td><td class='pname'>Keaon Koloamatangi</td><td class='ppos'>Prop</td><td class='elo-5'>2461</td></tr>
+<tr><td class='pnum'>11</td><td class='pname'>David Fifita</td><td class='ppos'>2nd Row</td><td class='elo-5'>2458</td></tr>
+<tr><td class='pnum'>12</td><td class='pname'>Tallis Duncan</td><td class='ppos'>2nd Row</td><td class='elo-3'>1668</td></tr>
+<tr><td class='pnum'>13</td><td class='pname'>Cameron Murray</td><td class='ppos'>Lock</td><td class='elo-5'>2360</td></tr>
+<tr><td class='pnum'>14</td><td class='pname'>Peter Mamouzelos</td><td class='ppos'>Interchange</td><td class='elo-1'>1401</td></tr>
+<tr><td class='pnum'>15</td><td class='pname'>Lachlan Hubner</td><td class='ppos'>Interchange</td><td class='elo-2'>1510</td></tr>
+<tr><td class='pnum'>16</td><td class='pname'>Sean Keppie</td><td class='ppos'>Interchange</td><td class='elo-2'>1508</td></tr>
+<tr><td class='pnum'>17</td><td class='pname'>Liam Le Blanc</td><td class='ppos'>Interchange</td><td class='elo-2'>1512</td></tr>
+<tr><td class='pnum'>18</td><td class='pname'>Bronson Garlick</td><td class='ppos'>Interchange</td><td class='elo-3'>1608</td></tr>
+<tr><td class='pnum'>19</td><td class='pname'>Jayden Sullivan</td><td class='ppos'>Interchange</td><td class='elo-2'>1515</td></tr>
+</tbody><tfoot><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;padding-top:4px;'>Player avg ELO</td><td class='elo-4'>1980</td></tr><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;'>Team ELO</td><td class='elo-2'>1509</td></tr></tfoot></table></div><div class="squad-side"><h3>Raiders</h3><table class='squad-table'><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>ELO</th></tr></thead><tbody><tr><td class='pnum'>1</td><td class='pname'>Kaeo Weekes</td><td class='ppos'>Fullback</td><td class='elo-3'>1634</td></tr>
+<tr><td class='pnum'>2</td><td class='pname'>Savelio Tamale</td><td class='ppos'>Winger</td><td class='elo-3'>1614</td></tr>
+<tr><td class='pnum'>3</td><td class='pname'>Simi Sasagi</td><td class='ppos'>Centre</td><td class='elo-1'>1464</td></tr>
+<tr><td class='pnum'>4</td><td class='pname'>Sebastian Kris</td><td class='ppos'>Centre</td><td class='elo-4'>1914</td></tr>
+<tr><td class='pnum'>5</td><td class='pname'>Jed Stuart</td><td class='ppos'>Winger</td><td class='elo-2'>1500</td></tr>
+<tr><td class='pnum'>6</td><td class='pname'>Ethan Strange</td><td class='ppos'>Five-Eighth</td><td class='elo-2'>1606</td></tr>
+<tr><td class='pnum'>7</td><td class='pname'>Ethan Sanders</td><td class='ppos'>Halfback</td><td class='elo-2'>1517</td></tr>
+<tr><td class='pnum'>8</td><td class='pname'>Josh Papalii</td><td class='ppos'>Prop</td><td class='elo-5'>2551</td></tr>
+<tr><td class='pnum'>9</td><td class='pname'>Tom Starling</td><td class='ppos'>Hooker</td><td class='elo-1'>1428</td></tr>
+<tr><td class='pnum'>10</td><td class='pname'>Joseph Tapine</td><td class='ppos'>Prop</td><td class='elo-5'>2586</td></tr>
+<tr><td class='pnum'>11</td><td class='pname'>Hudson Young</td><td class='ppos'>2nd Row</td><td class='elo-5'>2354</td></tr>
+<tr><td class='pnum'>12</td><td class='pname'>Noah Martin</td><td class='ppos'>2nd Row</td><td class='elo-2'>1511</td></tr>
+<tr><td class='pnum'>13</td><td class='pname'>Corey Horsburgh</td><td class='ppos'>Lock</td><td class='elo-4'>1944</td></tr>
+<tr><td class='pnum'>14</td><td class='pname'>Jayden Brailey</td><td class='ppos'>Interchange</td><td class='elo-3'>1625</td></tr>
+<tr><td class='pnum'>15</td><td class='pname'>Zac Hosking</td><td class='ppos'>Interchange</td><td class='elo-4'>1820</td></tr>
+<tr><td class='pnum'>16</td><td class='pname'>Ata Mariota</td><td class='ppos'>Interchange</td><td class='elo-2'>1561</td></tr>
+<tr><td class='pnum'>17</td><td class='pname'>Morgan Smithies</td><td class='ppos'>Interchange</td><td class='elo-3'>1744</td></tr>
+<tr><td class='pnum'>18</td><td class='pname'>Daine Laurie</td><td class='ppos'>Interchange</td><td class='elo-3'>1626</td></tr>
+<tr><td class='pnum'>19</td><td class='pname'>Joe Roddy</td><td class='ppos'>Interchange</td><td class='elo-1'>1465</td></tr>
+</tbody><tfoot><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;padding-top:4px;'>Player avg ELO</td><td class='elo-3'>1761</td></tr><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;'>Team ELO</td><td class='elo-1'>1368</td></tr></tfoot></table></div></div></td></tr>
+<tr class="match-row" onclick="toggleSquad('sq_20261110650')" title="Click to expand squads"><td>6</td><td>Sat 11</td><td class='team'>Sharks</td><td>1.67</td><td class="bk-odds" data-tip="TAB">2.05</td><td class="value-b">&#9733; +0.38</td><td class='team'>Roosters</td><td>2.50</td><td class="bk-odds" data-tip="Sportsbet">1.85</td><td class="neg">-0.65</td><td class='predicted'>Sharks (H)</td><td class="margin" style="padding:0 6px;"><svg width="180" height="28" style="display:block;margin:0 auto;"><rect width="180" height="28" fill="#1a1d2a" rx="3"/><rect x="61.6" width="73.4" y="4" height="20" fill="#4caf50" opacity="0.25"/><line x1="90" y1="2" x2="90" y2="26" stroke="#444" stroke-width="1"/><circle cx="98.3" cy="14" r="4" fill="#4caf50"/><text x="90" y="20" text-anchor="middle" fill="#ccc" font-size="10" font-family="monospace">24&ndash;20</text></svg></td><td class="line bk-odds" data-tip="TAB">+1.5</td><td class="pos">+5.2</td><td class="result-live">Upcoming</td></tr>
+<tr id="sq_20261110650" class="squad-row" style="display:none;"><td colspan="15" class="squad-cell"><div class="squad-cols"><div class="squad-side"><h3>Sharks</h3><table class='squad-table'><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>ELO</th></tr></thead><tbody><tr><td class='pnum'>1</td><td class='pname'>William Kennedy</td><td class='ppos'>Fullback</td><td class='elo-5'>2140</td></tr>
+<tr><td class='pnum'>2</td><td class='pname'>Sione Katoa</td><td class='ppos'>Winger</td><td class='elo-5'>2276</td></tr>
+<tr><td class='pnum'>3</td><td class='pname'>Mawene Hiroti</td><td class='ppos'>Centre</td><td class='elo-2'>1514</td></tr>
+<tr><td class='pnum'>4</td><td class='pname'>KL Iro</td><td class='ppos'>Centre</td><td class='elo-4'>1949</td></tr>
+<tr><td class='pnum'>5</td><td class='pname'>Samuel Stonestreet</td><td class='ppos'>Winger</td><td class='elo-3'>1706</td></tr>
+<tr><td class='pnum'>6</td><td class='pname'>Braydon Trindall</td><td class='ppos'>Five-Eighth</td><td class='elo-4'>1914</td></tr>
+<tr><td class='pnum'>7</td><td class='pname'>Nicholas Hynes</td><td class='ppos'>Halfback</td><td class='elo-5'>2404</td></tr>
+<tr><td class='pnum'>8</td><td class='pname'>Addin Fonua-Blake</td><td class='ppos'>Prop</td><td class='elo-5'>2633</td></tr>
+<tr><td class='pnum'>9</td><td class='pname'>Blayke Brailey</td><td class='ppos'>Hooker</td><td class='elo-5'>2338</td></tr>
+<tr><td class='pnum'>10</td><td class='pname'>Toby Rudolf</td><td class='ppos'>Prop</td><td class='elo-4'>2060</td></tr>
+<tr><td class='pnum'>11</td><td class='pname'>Billy Burns</td><td class='ppos'>2nd Row</td><td class='elo-2'>1591</td></tr>
+<tr><td class='pnum'>12</td><td class='pname'>Teig Wilton</td><td class='ppos'>2nd Row</td><td class='elo-4'>2086</td></tr>
+<tr><td class='pnum'>13</td><td class='pname'>Jesse Colquhoun</td><td class='ppos'>Lock</td><td class='elo-2'>1571</td></tr>
+<tr><td class='pnum'>14</td><td class='pname'>Briton Nikora</td><td class='ppos'>Interchange</td><td class='elo-5'>2304</td></tr>
+<tr><td class='pnum'>15</td><td class='pname'>Siosifa Talakai</td><td class='ppos'>Interchange</td><td class='elo-4'>2108</td></tr>
+<tr><td class='pnum'>16</td><td class='pname'>Oregon Kaufusi</td><td class='ppos'>Interchange</td><td class='elo-4'>1991</td></tr>
+<tr><td class='pnum'>17</td><td class='pname'>Thomas Hazelton</td><td class='ppos'>Interchange</td><td class='elo-4'>1829</td></tr>
+<tr><td class='pnum'>18</td><td class='pname'>Hohepa Puru</td><td class='ppos'>Interchange</td><td class='elo-1'>1447</td></tr>
+<tr><td class='pnum'>19</td><td class='pname'>Tuku Hau Tapuha</td><td class='ppos'>Interchange</td><td class='elo-2'>1582</td></tr>
+</tbody><tfoot><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;padding-top:4px;'>Player avg ELO</td><td class='elo-4'>1971</td></tr><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;'>Team ELO</td><td class='elo-3'>1679</td></tr></tfoot></table></div><div class="squad-side"><h3>Roosters</h3><table class='squad-table'><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>ELO</th></tr></thead><tbody><tr><td class='pnum'>1</td><td class='pname'>James Tedesco</td><td class='ppos'>Fullback</td><td class='elo-5'>2766</td></tr>
+<tr><td class='pnum'>2</td><td class='pname'>Daniel Tupou</td><td class='ppos'>Winger</td><td class='elo-5'>2622</td></tr>
+<tr><td class='pnum'>3</td><td class='pname'>Hugo Savala</td><td class='ppos'>Centre</td><td class='elo-1'>1451</td></tr>
+<tr><td class='pnum'>4</td><td class='pname'>Robert Toia</td><td class='ppos'>Centre</td><td class='elo-3'>1609</td></tr>
+<tr><td class='pnum'>5</td><td class='pname'>Mark Nawaqanitawase</td><td class='ppos'>Winger</td><td class='elo-3'>1638</td></tr>
+<tr><td class='pnum'>6</td><td class='pname'>Daly Cherry-Evans</td><td class='ppos'>Five-Eighth</td><td class='elo-5'>2627</td></tr>
+<tr><td class='pnum'>7</td><td class='pname'>Sam Walker</td><td class='ppos'>Halfback</td><td class='elo-4'>2039</td></tr>
+<tr><td class='pnum'>8</td><td class='pname'>Naufahu Whyte</td><td class='ppos'>Prop</td><td class='elo-4'>1918</td></tr>
+<tr><td class='pnum'>9</td><td class='pname'>Reece Robson</td><td class='ppos'>Hooker</td><td class='elo-5'>2221</td></tr>
+<tr><td class='pnum'>10</td><td class='pname'>Lindsay Collins</td><td class='ppos'>Prop</td><td class='elo-4'>1884</td></tr>
+<tr><td class='pnum'>11</td><td class='pname'>Angus Crichton</td><td class='ppos'>2nd Row</td><td class='elo-5'>2556</td></tr>
+<tr><td class='pnum'>12</td><td class='pname'>Siua Wong</td><td class='ppos'>2nd Row</td><td class='elo-3'>1615</td></tr>
+<tr><td class='pnum'>13</td><td class='pname'>Victor Radley</td><td class='ppos'>Lock</td><td class='elo-4'>2048</td></tr>
+<tr><td class='pnum'>14</td><td class='pname'>Connor Watson</td><td class='ppos'>Interchange</td><td class='elo-4'>2050</td></tr>
+<tr><td class='pnum'>15</td><td class='pname'>Spencer Leniu</td><td class='ppos'>Interchange</td><td class='elo-4'>2098</td></tr>
+<tr><td class='pnum'>16</td><td class='pname'>Nat Butcher</td><td class='ppos'>Interchange</td><td class='elo-5'>2183</td></tr>
+<tr><td class='pnum'>17</td><td class='pname'>Salesi Foketi</td><td class='ppos'>Interchange</td><td class='elo-2'>1525</td></tr>
+<tr><td class='pnum'>18</td><td class='pname'>Cody Ramsey</td><td class='ppos'>Interchange</td><td class='elo-2'>1590</td></tr>
+<tr><td class='pnum'>19</td><td class='pname'>Tommy Talau</td><td class='ppos'>Interchange</td><td class='elo-3'>1736</td></tr>
+</tbody><tfoot><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;padding-top:4px;'>Player avg ELO</td><td class='elo-4'>2009</td></tr><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;'>Team ELO</td><td class='elo-3'>1606</td></tr></tfoot></table></div></div></td></tr>
+<tr class="match-row" onclick="toggleSquad('sq_20261110660')" title="Click to expand squads"><td>6</td><td>Sat 11</td><td class='team'>Storm</td><td>1.33</td><td class="bk-odds" data-tip="Sportsbet">1.36</td><td class="pos">+0.03</td><td class='team'>Warriors</td><td>3.99</td><td class="bk-odds" data-tip="TAB">3.25</td><td class="neg">-0.74</td><td class='predicted'>Storm (H)</td><td class="margin" style="padding:0 6px;"><svg width="180" height="28" style="display:block;margin:0 auto;"><rect width="180" height="28" fill="#1a1d2a" rx="3"/><rect x="71.2" width="73.4" y="4" height="20" fill="#4caf50" opacity="0.25"/><line x1="90" y1="2" x2="90" y2="26" stroke="#444" stroke-width="1"/><circle cx="107.9" cy="14" r="4" fill="#4caf50"/><text x="90" y="20" text-anchor="middle" fill="#ccc" font-size="10" font-family="monospace">26&ndash;18</text></svg></td><td class="line bk-odds" data-tip="Sportsbet">-9.5</td><td class="neg">-1.5</td><td class="result-live">Upcoming</td></tr>
+<tr id="sq_20261110660" class="squad-row" style="display:none;"><td colspan="15" class="squad-cell"><div class="squad-cols"><div class="squad-side"><h3>Storm</h3><table class='squad-table'><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>ELO</th></tr></thead><tbody><tr><td class='pnum'>1</td><td class='pname'>Sualauvi Faalogo</td><td class='ppos'>Fullback</td><td class='elo-4'>1882</td></tr>
+<tr><td class='pnum'>2</td><td class='pname'>Will Warbrick</td><td class='ppos'>Winger</td><td class='elo-4'>2080</td></tr>
+<tr><td class='pnum'>3</td><td class='pname'>Jack Howarth</td><td class='ppos'>Centre</td><td class='elo-4'>1807</td></tr>
+<tr><td class='pnum'>4</td><td class='pname'>Nick Meaney</td><td class='ppos'>Centre</td><td class='elo-5'>2131</td></tr>
+<tr><td class='pnum'>5</td><td class='pname'>Moses Leo</td><td class='ppos'>Winger</td><td class='elo-2'>1533</td></tr>
+<tr><td class='pnum'>6</td><td class='pname'>Cameron Munster</td><td class='ppos'>Five-Eighth</td><td class='elo-5'>2820</td></tr>
+<tr><td class='pnum'>7</td><td class='pname'>Jahrome Hughes</td><td class='ppos'>Halfback</td><td class='elo-5'>2884</td></tr>
+<tr><td class='pnum'>8</td><td class='pname'>Stefano Utoikamanu</td><td class='ppos'>Prop</td><td class='elo-3'>1804</td></tr>
+<tr><td class='pnum'>9</td><td class='pname'>Harry Grant</td><td class='ppos'>Hooker</td><td class='elo-5'>2592</td></tr>
+<tr><td class='pnum'>10</td><td class='pname'>Josh King</td><td class='ppos'>Prop</td><td class='elo-5'>2176</td></tr>
+<tr><td class='pnum'>11</td><td class='pname'>Joe Chan</td><td class='ppos'>2nd Row</td><td class='elo-2'>1552</td></tr>
+<tr><td class='pnum'>12</td><td class='pname'>Cooper Clarke</td><td class='ppos'>2nd Row</td><td class='elo-2'>1500</td></tr>
+<tr><td class='pnum'>13</td><td class='pname'>Trent Loiero</td><td class='ppos'>Lock</td><td class='elo-5'>2218</td></tr>
+<tr><td class='pnum'>14</td><td class='pname'>Tyran Wishart</td><td class='ppos'>Interchange</td><td class='elo-4'>1853</td></tr>
+<tr><td class='pnum'>15</td><td class='pname'>Alec MacDonald</td><td class='ppos'>Interchange</td><td class='elo-3'>1644</td></tr>
+<tr><td class='pnum'>16</td><td class='pname'>Jack Hetherington</td><td class='ppos'>Interchange</td><td class='elo-1'>1470</td></tr>
+<tr><td class='pnum'>17</td><td class='pname'>Davvy Moale</td><td class='ppos'>Interchange</td><td class='elo-3'>1606</td></tr>
+<tr><td class='pnum'>18</td><td class='pname'>Lazarus Vaalepu</td><td class='ppos'>Interchange</td><td class='elo-2'>1544</td></tr>
+<tr><td class='pnum'>19</td><td class='pname'>Manaia Waitere</td><td class='ppos'>Interchange</td><td class='elo-2'>1540</td></tr>
+</tbody><tfoot><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;padding-top:4px;'>Player avg ELO</td><td class='elo-4'>1928</td></tr><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;'>Team ELO</td><td class='elo-3'>1608</td></tr></tfoot></table></div><div class="squad-side"><h3>Warriors</h3><table class='squad-table'><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>ELO</th></tr></thead><tbody><tr><td class='pnum'>1</td><td class='pname'>Taine Tuaupiki</td><td class='ppos'>Fullback</td><td class='elo-3'>1716</td></tr>
+<tr><td class='pnum'>2</td><td class='pname'>Dallin Watene-Zelezniak</td><td class='ppos'>Winger</td><td class='elo-4'>2089</td></tr>
+<tr><td class='pnum'>3</td><td class='pname'>Charnze Nicoll-Klokstad</td><td class='ppos'>Centre</td><td class='elo-5'>2172</td></tr>
+<tr><td class='pnum'>4</td><td class='pname'>Adam Pompey</td><td class='ppos'>Centre</td><td class='elo-4'>1960</td></tr>
+<tr><td class='pnum'>5</td><td class='pname'>Roger Tuivasa-Sheck</td><td class='ppos'>Winger</td><td class='elo-4'>1982</td></tr>
+<tr><td class='pnum'>6</td><td class='pname'>Chanel Harris-Tavita</td><td class='ppos'>Five-Eighth</td><td class='elo-3'>1625</td></tr>
+<tr><td class='pnum'>7</td><td class='pname'>Tanah Boyd</td><td class='ppos'>Halfback</td><td class='elo-2'>1549</td></tr>
+<tr><td class='pnum'>8</td><td class='pname'>James Fisher-Harris</td><td class='ppos'>Prop</td><td class='elo-5'>2933</td></tr>
+<tr><td class='pnum'>9</td><td class='pname'>Wayde Egan</td><td class='ppos'>Hooker</td><td class='elo-5'>2188</td></tr>
+<tr><td class='pnum'>10</td><td class='pname'>Jackson Ford</td><td class='ppos'>Prop</td><td class='elo-4'>1904</td></tr>
+<tr><td class='pnum'>11</td><td class='pname'>Leka Halasima</td><td class='ppos'>2nd Row</td><td class='elo-3'>1714</td></tr>
+<tr><td class='pnum'>12</td><td class='pname'>Jacob Laban</td><td class='ppos'>2nd Row</td><td class='elo-2'>1585</td></tr>
+<tr><td class='pnum'>13</td><td class='pname'>Erin Clark</td><td class='ppos'>Lock</td><td class='elo-4'>1888</td></tr>
+<tr><td class='pnum'>14</td><td class='pname'>Sam Healey</td><td class='ppos'>Interchange</td><td class='elo-2'>1536</td></tr>
+<tr><td class='pnum'>15</td><td class='pname'>Marata Niukore</td><td class='ppos'>Interchange</td><td class='elo-4'>1975</td></tr>
+<tr><td class='pnum'>16</td><td class='pname'>Demitric Vaimauga</td><td class='ppos'>Interchange</td><td class='elo-1'>1459</td></tr>
+<tr><td class='pnum'>17</td><td class='pname'>Tanner Stowers-Smith</td><td class='ppos'>Interchange</td><td class='elo-1'>1494</td></tr>
+<tr><td class='pnum'>18</td><td class='pname'>Eddie Ieremia-Toeava</td><td class='ppos'>Interchange</td><td class='elo-2'>1500</td></tr>
+</tbody><tfoot><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;padding-top:4px;'>Player avg ELO</td><td class='elo-4'>1848</td></tr><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;'>Team ELO</td><td class='elo-1'>1496</td></tr></tfoot></table></div></div></td></tr>
+<tr class="match-row" onclick="toggleSquad('sq_20261110670')" title="Click to expand squads"><td>6</td><td>Sun 12</td><td class='team'>Eels</td><td>1.42</td><td class="bk-odds" data-tip="TAB">1.65</td><td class="value-b">&#9733; +0.23</td><td class='team'>Titans</td><td>3.41</td><td class="bk-odds" data-tip="Sportsbet">2.35</td><td class="neg">-1.06</td><td class='predicted'>Eels (H)</td><td class="margin" style="padding:0 6px;"><svg width="180" height="28" style="display:block;margin:0 auto;"><rect width="180" height="28" fill="#1a1d2a" rx="3"/><rect x="67.7" width="73.4" y="4" height="20" fill="#4caf50" opacity="0.25"/><line x1="90" y1="2" x2="90" y2="26" stroke="#444" stroke-width="1"/><circle cx="104.4" cy="14" r="4" fill="#4caf50"/><text x="90" y="20" text-anchor="middle" fill="#ccc" font-size="10" font-family="monospace">27&ndash;20</text></svg></td><td class="line bk-odds" data-tip="Sportsbet">-4.5</td><td class="pos">+1.9</td><td class="result-live">Upcoming</td></tr>
+<tr id="sq_20261110670" class="squad-row" style="display:none;"><td colspan="15" class="squad-cell"><div class="squad-cols"><div class="squad-side"><h3>Eels</h3><table class='squad-table'><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>ELO</th></tr></thead><tbody><tr><td class='pnum'>1</td><td class='pname'>Joash Papalii</td><td class='ppos'>Fullback</td><td class='elo-1'>1428</td></tr>
+<tr><td class='pnum'>2</td><td class='pname'>Araz Nanva</td><td class='ppos'>Winger</td><td class='elo-2'>1500</td></tr>
+<tr><td class='pnum'>3</td><td class='pname'>Will Penisini</td><td class='ppos'>Centre</td><td class='elo-4'>1951</td></tr>
+<tr><td class='pnum'>4</td><td class='pname'>Brian Kelly</td><td class='ppos'>Centre</td><td class='elo-4'>1954</td></tr>
+<tr><td class='pnum'>5</td><td class='pname'>Josh Addo-Carr</td><td class='ppos'>Winger</td><td class='elo-5'>2253</td></tr>
+<tr><td class='pnum'>6</td><td class='pname'>Ronald Volkman</td><td class='ppos'>Five-Eighth</td><td class='elo-2'>1507</td></tr>
+<tr><td class='pnum'>7</td><td class='pname'>Mitchell Moses</td><td class='ppos'>Halfback</td><td class='elo-5'>2242</td></tr>
+<tr><td class='pnum'>8</td><td class='pname'>Jack Williams</td><td class='ppos'>Prop</td><td class='elo-4'>1869</td></tr>
+<tr><td class='pnum'>9</td><td class='pname'>Ryley Smith</td><td class='ppos'>Hooker</td><td class='elo-1'>1366</td></tr>
+<tr><td class='pnum'>10</td><td class='pname'>Junior Paulo</td><td class='ppos'>Prop</td><td class='elo-5'>2385</td></tr>
+<tr><td class='pnum'>11</td><td class='pname'>Kelma Tuilagi</td><td class='ppos'>2nd Row</td><td class='elo-2'>1541</td></tr>
+<tr><td class='pnum'>12</td><td class='pname'>Kitione Kautoga</td><td class='ppos'>2nd Row</td><td class='elo-1'>1487</td></tr>
+<tr><td class='pnum'>13</td><td class='pname'>Dylan Walker</td><td class='ppos'>Lock</td><td class='elo-4'>1963</td></tr>
+<tr><td class='pnum'>14</td><td class='pname'>Tallyn Da Silva</td><td class='ppos'>Interchange</td><td class='elo-1'>1241</td></tr>
+<tr><td class='pnum'>15</td><td class='pname'>Charlie Guymer</td><td class='ppos'>Interchange</td><td class='elo-1'>1412</td></tr>
+<tr><td class='pnum'>16</td><td class='pname'>Sam Tuivaiti</td><td class='ppos'>Interchange</td><td class='elo-1'>1416</td></tr>
+<tr><td class='pnum'>17</td><td class='pname'>Luca Moretti</td><td class='ppos'>Interchange</td><td class='elo-1'>1422</td></tr>
+<tr><td class='pnum'>18</td><td class='pname'>Jack De Belin</td><td class='ppos'>Interchange</td><td class='elo-4'>2086</td></tr>
+<tr><td class='pnum'>19</td><td class='pname'>Teancum Brown</td><td class='ppos'>Interchange</td><td class='elo-2'>1500</td></tr>
+</tbody><tfoot><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;padding-top:4px;'>Player avg ELO</td><td class='elo-3'>1712</td></tr><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;'>Team ELO</td><td class='elo-2'>1509</td></tr></tfoot></table></div><div class="squad-side"><h3>Titans</h3><table class='squad-table'><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>ELO</th></tr></thead><tbody><tr><td class='pnum'>1</td><td class='pname'>Keano Kini</td><td class='ppos'>Fullback</td><td class='elo-2'>1599</td></tr>
+<tr><td class='pnum'>2</td><td class='pname'>Sialetili Faeamani</td><td class='ppos'>Winger</td><td class='elo-1'>1499</td></tr>
+<tr><td class='pnum'>3</td><td class='pname'>Jojo Fifita</td><td class='ppos'>Centre</td><td class='elo-3'>1660</td></tr>
+<tr><td class='pnum'>4</td><td class='pname'>AJ Brimson</td><td class='ppos'>Centre</td><td class='elo-3'>1701</td></tr>
+<tr><td class='pnum'>5</td><td class='pname'>Phillip Sami</td><td class='ppos'>Winger</td><td class='elo-4'>1909</td></tr>
+<tr><td class='pnum'>6</td><td class='pname'>Lachlan Ilias</td><td class='ppos'>Five-Eighth</td><td class='elo-3'>1624</td></tr>
+<tr><td class='pnum'>7</td><td class='pname'>Jayden Campbell</td><td class='ppos'>Halfback</td><td class='elo-3'>1748</td></tr>
+<tr><td class='pnum'>8</td><td class='pname'>Klese Haas</td><td class='ppos'>Prop</td><td class='elo-1'>1403</td></tr>
+<tr><td class='pnum'>9</td><td class='pname'>Sam Verrills</td><td class='ppos'>Hooker</td><td class='elo-3'>1692</td></tr>
+<tr><td class='pnum'>10</td><td class='pname'>Tino Fa'asuamaleaui</td><td class='ppos'>Prop</td><td class='elo-4'>1997</td></tr>
+<tr><td class='pnum'>11</td><td class='pname'>Arama Hau</td><td class='ppos'>2nd Row</td><td class='elo-2'>1550</td></tr>
+<tr><td class='pnum'>12</td><td class='pname'>Beau Fermor</td><td class='ppos'>2nd Row</td><td class='elo-3'>1800</td></tr>
+<tr><td class='pnum'>13</td><td class='pname'>Chris Randall</td><td class='ppos'>Lock</td><td class='elo-3'>1674</td></tr>
+<tr><td class='pnum'>14</td><td class='pname'>Kurtis Morrin</td><td class='ppos'>Interchange</td><td class='elo-1'>1342</td></tr>
+<tr><td class='pnum'>15</td><td class='pname'>Cooper Bai</td><td class='ppos'>Interchange</td><td class='elo-2'>1515</td></tr>
+<tr><td class='pnum'>16</td><td class='pname'>Moeaki Fotuaika</td><td class='ppos'>Interchange</td><td class='elo-4'>1932</td></tr>
+<tr><td class='pnum'>17</td><td class='pname'>Oliver Pascoe</td><td class='ppos'>Interchange</td><td class='elo-2'>1503</td></tr>
+<tr><td class='pnum'>18</td><td class='pname'>Jaylan De Groot</td><td class='ppos'>Interchange</td><td class='elo-2'>1503</td></tr>
+<tr><td class='pnum'>19</td><td class='pname'>Jett Liu</td><td class='ppos'>Interchange</td><td class='elo-2'>1500</td></tr>
+</tbody><tfoot><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;padding-top:4px;'>Player avg ELO</td><td class='elo-3'>1640</td></tr><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;'>Team ELO</td><td class='elo-1'>1245</td></tr></tfoot></table></div></div></td></tr>
+<tr class="match-row" onclick="toggleSquad('sq_20261110680')" title="Click to expand squads"><td>6</td><td>Sun 12</td><td class='team'>Wests Tigers</td><td>1.60</td><td class="bk-odds" data-tip="Neds">1.70</td><td class="pos">+0.10</td><td class='team'>Knights</td><td>2.66</td><td class="bk-odds" data-tip="Sportsbet">2.23</td><td class="neg">-0.43</td><td class='predicted'>Wests Tigers (H)</td><td class="margin" style="padding:0 6px;"><svg width="180" height="28" style="display:block;margin:0 auto;"><rect width="180" height="28" fill="#1a1d2a" rx="3"/><rect x="62.7" width="73.4" y="4" height="20" fill="#4caf50" opacity="0.25"/><line x1="90" y1="2" x2="90" y2="26" stroke="#444" stroke-width="1"/><circle cx="99.4" cy="14" r="4" fill="#4caf50"/><text x="90" y="20" text-anchor="middle" fill="#ccc" font-size="10" font-family="monospace">25&ndash;20</text></svg></td><td class="line bk-odds" data-tip="TAB">-3.5</td><td class="pos">+0.7</td><td class="result-live">Upcoming</td></tr>
+<tr id="sq_20261110680" class="squad-row" style="display:none;"><td colspan="15" class="squad-cell"><div class="squad-cols"><div class="squad-side"><h3>Wests Tigers</h3><table class='squad-table'><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>ELO</th></tr></thead><tbody><tr><td class='pnum'>1</td><td class='pname'>Jahream Bula</td><td class='ppos'>Fullback</td><td class='elo-3'>1650</td></tr>
+<tr><td class='pnum'>2</td><td class='pname'>Faaletino Tavana</td><td class='ppos'>Winger</td><td class='elo-2'>1569</td></tr>
+<tr><td class='pnum'>3</td><td class='pname'>Sunia Turuva</td><td class='ppos'>Centre</td><td class='elo-5'>2207</td></tr>
+<tr><td class='pnum'>4</td><td class='pname'>Heamasi Makasini</td><td class='ppos'>Centre</td><td class='elo-3'>1611</td></tr>
+<tr><td class='pnum'>5</td><td class='pname'>Jeral Skelton</td><td class='ppos'>Winger</td><td class='elo-3'>1708</td></tr>
+<tr><td class='pnum'>6</td><td class='pname'>Jock Madden</td><td class='ppos'>Five-Eighth</td><td class='elo-3'>1631</td></tr>
+<tr><td class='pnum'>7</td><td class='pname'>Adam Doueihi</td><td class='ppos'>Halfback</td><td class='elo-4'>1861</td></tr>
+<tr><td class='pnum'>8</td><td class='pname'>Terrell May</td><td class='ppos'>Prop</td><td class='elo-5'>2344</td></tr>
+<tr><td class='pnum'>9</td><td class='pname'>Apisai Koroisau</td><td class='ppos'>Hooker</td><td class='elo-5'>2308</td></tr>
+<tr><td class='pnum'>10</td><td class='pname'>Fonua Pole</td><td class='ppos'>Prop</td><td class='elo-3'>1637</td></tr>
+<tr><td class='pnum'>11</td><td class='pname'>Samuela Fainu</td><td class='ppos'>2nd Row</td><td class='elo-3'>1713</td></tr>
+<tr><td class='pnum'>12</td><td class='pname'>Kai Pearce-Paul</td><td class='ppos'>2nd Row</td><td class='elo-4'>1878</td></tr>
+<tr><td class='pnum'>13</td><td class='pname'>Alex Twal</td><td class='ppos'>Lock</td><td class='elo-4'>2038</td></tr>
+<tr><td class='pnum'>14</td><td class='pname'>Latu Fainu</td><td class='ppos'>Interchange</td><td class='elo-1'>1413</td></tr>
+<tr><td class='pnum'>15</td><td class='pname'>Sione Fainu</td><td class='ppos'>Interchange</td><td class='elo-3'>1612</td></tr>
+<tr><td class='pnum'>16</td><td class='pname'>Royce Hunt</td><td class='ppos'>Interchange</td><td class='elo-4'>1875</td></tr>
+<tr><td class='pnum'>17</td><td class='pname'>Alex Seyfarth</td><td class='ppos'>Interchange</td><td class='elo-1'>1313</td></tr>
+<tr><td class='pnum'>18</td><td class='pname'>Tristan Hope</td><td class='ppos'>Interchange</td><td class='elo-1'>1463</td></tr>
+<tr><td class='pnum'>19</td><td class='pname'>Patrick Herbert</td><td class='ppos'>Interchange</td><td class='elo-2'>1551</td></tr>
+</tbody><tfoot><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;padding-top:4px;'>Player avg ELO</td><td class='elo-3'>1757</td></tr><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;'>Team ELO</td><td class='elo-1'>1487</td></tr></tfoot></table></div><div class="squad-side"><h3>Knights</h3><table class='squad-table'><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>ELO</th></tr></thead><tbody><tr><td class='pnum'>1</td><td class='pname'>Fletcher Hunt</td><td class='ppos'>Fullback</td><td class='elo-3'>1631</td></tr>
+<tr><td class='pnum'>2</td><td class='pname'>Dominic Young</td><td class='ppos'>Winger</td><td class='elo-5'>2155</td></tr>
+<tr><td class='pnum'>3</td><td class='pname'>Dane Gagai</td><td class='ppos'>Centre</td><td class='elo-5'>2470</td></tr>
+<tr><td class='pnum'>4</td><td class='pname'>Wilson De Courcey</td><td class='ppos'>Centre</td><td class='elo-2'>1519</td></tr>
+<tr><td class='pnum'>5</td><td class='pname'>Greg Marzhew</td><td class='ppos'>Winger</td><td class='elo-5'>2277</td></tr>
+<tr><td class='pnum'>6</td><td class='pname'>Fletcher Sharpe</td><td class='ppos'>Five-Eighth</td><td class='elo-3'>1717</td></tr>
+<tr><td class='pnum'>7</td><td class='pname'>Sandon Smith</td><td class='ppos'>Halfback</td><td class='elo-3'>1635</td></tr>
+<tr><td class='pnum'>8</td><td class='pname'>Jacob Saifiti</td><td class='ppos'>Prop</td><td class='elo-4'>1976</td></tr>
+<tr><td class='pnum'>9</td><td class='pname'>Phoenix Crossland</td><td class='ppos'>Hooker</td><td class='elo-2'>1553</td></tr>
+<tr><td class='pnum'>10</td><td class='pname'>Trey Mooney</td><td class='ppos'>Prop</td><td class='elo-3'>1658</td></tr>
+<tr><td class='pnum'>11</td><td class='pname'>Dylan Lucas</td><td class='ppos'>2nd Row</td><td class='elo-4'>2009</td></tr>
+<tr><td class='pnum'>12</td><td class='pname'>Jermaine McEwen</td><td class='ppos'>2nd Row</td><td class='elo-2'>1541</td></tr>
+<tr><td class='pnum'>13</td><td class='pname'>Mat Croker</td><td class='ppos'>Lock</td><td class='elo-3'>1746</td></tr>
+<tr><td class='pnum'>14</td><td class='pname'>Harrison Graham</td><td class='ppos'>Interchange</td><td class='elo-2'>1530</td></tr>
+<tr><td class='pnum'>15</td><td class='pname'>Tyson Frizell</td><td class='ppos'>Interchange</td><td class='elo-5'>2393</td></tr>
+<tr><td class='pnum'>16</td><td class='pname'>Pasami Saulo</td><td class='ppos'>Interchange</td><td class='elo-1'>1365</td></tr>
+<tr><td class='pnum'>17</td><td class='pname'>Thomas Cant</td><td class='ppos'>Interchange</td><td class='elo-1'>1472</td></tr>
+<tr><td class='pnum'>18</td><td class='pname'>Tyson Gamble</td><td class='ppos'>Interchange</td><td class='elo-3'>1748</td></tr>
+<tr><td class='pnum'>19</td><td class='pname'>Cody Hopwood</td><td class='ppos'>Interchange</td><td class='elo-1'>1500</td></tr>
+</tbody><tfoot><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;padding-top:4px;'>Player avg ELO</td><td class='elo-3'>1784</td></tr><tr><td colspan='3' style='text-align:right;color:#888;font-size:0.78rem;'>Team ELO</td><td class='elo-1'>1480</td></tr></tfoot></table></div></div></td></tr>
 </tbody>
 </table>
+
+<p style="margin-top:1.5rem;font-size:0.85rem;color:#666;">
+  <a href="accuracy.html" style="color:#88aaff;">&#128200; View model accuracy by round &rarr;</a>
+</p>
 <footer class="disclaimer">
   Gamble responsibly. Think about how much you can really afford. Set a budget before you play.
   Don&#39;t chase your losses. If gambling is affecting you or someone you know, call Gambling Help on
